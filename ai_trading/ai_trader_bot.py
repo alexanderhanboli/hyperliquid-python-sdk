@@ -13,7 +13,7 @@ import time
 import schedule
 from datetime import datetime
 from typing import Dict, Any, List
-import anthropic
+from openai import OpenAI
 import example_utils
 from hyperliquid.utils import constants
 
@@ -28,23 +28,26 @@ class AITradingBot:
     def __init__(
         self,
         coins: List[str],
-        anthropic_api_key: str,
+        deepseek_api_key: str,
         use_testnet: bool = True,
         interval_minutes: int = 3,
-        initial_capital: float = 10000.0
+        initial_capital: float = 10000.0,
+        model: str = "deepseek-reasoner"
     ):
         """
         Args:
             coins: 交易的币种列表，如 ["BTC", "ETH", "SOL"]
-            anthropic_api_key: Anthropic API key (用于调用 Claude)
+            deepseek_api_key: DeepSeek API key
             use_testnet: 是否使用测试网
             interval_minutes: 交易间隔（分钟）
             initial_capital: 初始资金
+            model: DeepSeek 模型名称 (deepseek-chat 或 deepseek-reasoner)
         """
         self.coins = coins
         self.interval_minutes = interval_minutes
         self.initial_capital = initial_capital
         self.use_testnet = use_testnet
+        self.model = model
         
         # 初始化 Hyperliquid API
         base_url = constants.TESTNET_API_URL if use_testnet else constants.MAINNET_API_URL
@@ -58,8 +61,11 @@ class AITradingBot:
         self.prompt_builder = PromptBuilder(coins)
         self.order_executor = OrderExecutor(self.exchange, self.info)
         
-        # 初始化 Anthropic 客户端
-        self.anthropic_client = anthropic.Anthropic(api_key=anthropic_api_key)
+        # 初始化 DeepSeek 客户端 (使用 OpenAI SDK)
+        self.ai_client = OpenAI(
+            api_key=deepseek_api_key,
+            base_url="https://api.deepseek.com"
+        )
         
         # 交易统计
         self.start_time = datetime.now()
@@ -142,7 +148,7 @@ class AITradingBot:
             print(f"  Prompt 已保存到 ai_trading/last_prompt.txt")
             
             # 4. 调用 AI 模型
-            print("\n🤖 调用 AI 模型 (Claude Sonnet 4.5)...")
+            print(f"\n🤖 调用 AI 模型 (DeepSeek {self.model})...")
             ai_decisions = self._call_ai_model(prompt)
             
             if not ai_decisions:
@@ -172,21 +178,26 @@ class AITradingBot:
     def _call_ai_model(self, prompt: str) -> Dict[str, Any]:
         """调用 AI 模型获取决策"""
         try:
-            # 调用 Claude API
-            message = self.anthropic_client.messages.create(
-                model="claude-sonnet-4-20250514",  # Claude Sonnet 4.5
-                max_tokens=4096,
-                temperature=0.7,
+            # 调用 DeepSeek API (使用 OpenAI SDK)
+            response = self.ai_client.chat.completions.create(
+                model=self.model,
                 messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert cryptocurrency trading AI assistant. Always respond with valid JSON format."
+                    },
                     {
                         "role": "user",
                         "content": prompt
                     }
-                ]
+                ],
+                temperature=0.7,
+                max_tokens=4096,
+                stream=False
             )
             
             # 提取响应内容
-            response_text = message.content[0].text
+            response_text = response.choices[0].message.content
             
             # 尝试从响应中提取 JSON
             # AI 可能返回的是包含 ```json ... ``` 的格式
@@ -204,6 +215,8 @@ class AITradingBot:
         
         except Exception as e:
             print(f"❌ 调用 AI 模型失败: {e}")
+            import traceback
+            traceback.print_exc()
             return {}
     
     def _execute_decisions(self, decisions: Dict[str, Any]):
@@ -292,17 +305,18 @@ def main():
     parser.add_argument("--interval", type=int, default=3, help="交易间隔（分钟）")
     parser.add_argument("--testnet", action="store_true", default=True, help="使用测试网")
     parser.add_argument("--test", action="store_true", help="测试模式（只运行一次）")
-    parser.add_argument("--api-key", type=str, help="Anthropic API Key")
+    parser.add_argument("--api-key", type=str, help="DeepSeek API Key")
+    parser.add_argument("--model", type=str, default="deepseek-reasoner", choices=["deepseek-chat", "deepseek-reasoner"], help="DeepSeek 模型")
     
     args = parser.parse_args()
     
     # 获取 API Key
-    api_key = args.api_key or os.environ.get("ANTHROPIC_API_KEY")
+    api_key = args.api_key or os.environ.get("DEEPSEEK_API_KEY")
     
     if not api_key:
-        print("❌ 错误: 请设置 ANTHROPIC_API_KEY 环境变量或使用 --api-key 参数")
+        print("❌ 错误: 请设置 DEEPSEEK_API_KEY 环境变量或使用 --api-key 参数")
         print("\n使用方法:")
-        print("  export ANTHROPIC_API_KEY='your-api-key'")
+        print("  export DEEPSEEK_API_KEY='your-api-key'")
         print("  python ai_trader_bot.py")
         print("\n或:")
         print("  python ai_trader_bot.py --api-key 'your-api-key'")
@@ -311,9 +325,10 @@ def main():
     # 创建机器人
     bot = AITradingBot(
         coins=args.coins,
-        anthropic_api_key=api_key,
+        deepseek_api_key=api_key,
         use_testnet=args.testnet,
-        interval_minutes=args.interval
+        interval_minutes=args.interval,
+        model=args.model
     )
     
     # 启动

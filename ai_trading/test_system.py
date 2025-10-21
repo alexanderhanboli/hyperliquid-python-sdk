@@ -40,11 +40,11 @@ def test_imports():
         return False
     
     try:
-        import anthropic
-        print("✅ anthropic 导入成功")
+        from openai import OpenAI
+        print("✅ openai 导入成功")
     except Exception as e:
-        print(f"❌ anthropic 导入失败: {e}")
-        print("   请运行: pip install anthropic")
+        print(f"❌ openai 导入失败: {e}")
+        print("   请运行: pip install openai")
         return False
     
     try:
@@ -201,41 +201,48 @@ def test_prompt_builder():
         return False
 
 
-def test_anthropic_api():
-    """测试 Anthropic API"""
+def test_deepseek_api():
+    """测试 DeepSeek API"""
     print("\n" + "="*60)
-    print("🤖 测试 Anthropic API...")
+    print("🤖 测试 DeepSeek API...")
     print("="*60)
     
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = os.environ.get("DEEPSEEK_API_KEY")
     
     if not api_key:
-        print("⚠️ 未设置 ANTHROPIC_API_KEY，跳过测试")
-        print("   设置方法: export ANTHROPIC_API_KEY='your-api-key'")
+        print("⚠️ 未设置 DEEPSEEK_API_KEY，跳过测试")
+        print("   设置方法: export DEEPSEEK_API_KEY='your-api-key'")
         return True  # 不算失败
     
     try:
-        import anthropic
+        from openai import OpenAI
         
-        client = anthropic.Anthropic(api_key=api_key)
-        
-        # 简单测试
-        message = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=100,
-            messages=[
-                {"role": "user", "content": "Say 'API test successful' in JSON format"}
-            ]
+        client = OpenAI(
+            api_key=api_key,
+            base_url="https://api.deepseek.com"
         )
         
-        response = message.content[0].text
-        print(f"✅ Anthropic API 连接成功")
-        print(f"   响应: {response[:100]}...")
+        # 简单测试
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            max_tokens=100,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant"},
+                {"role": "user", "content": "Say 'API test successful' in JSON format"}
+            ],
+            stream=False
+        )
+        
+        response_text = response.choices[0].message.content
+        print(f"✅ DeepSeek API 连接成功")
+        print(f"   响应: {response_text[:100]}...")
         
         return True
     
     except Exception as e:
-        print(f"❌ Anthropic API 测试失败: {e}")
+        print(f"❌ DeepSeek API 测试失败: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
@@ -268,8 +275,8 @@ def main():
     # 4. 测试 Prompt 构建
     results.append(("Prompt 构建", test_prompt_builder()))
     
-    # 5. 测试 Anthropic API
-    results.append(("Anthropic API", test_anthropic_api()))
+    # 5. 测试 DeepSeek API
+    results.append(("DeepSeek API", test_deepseek_api()))
     
     # 总结
     print("\n" + "="*80)
@@ -285,9 +292,10 @@ def main():
     if all_passed:
         print("\n🎉 所有测试通过！系统已准备就绪！")
         print("\n下一步:")
-        print("  1. 设置 ANTHROPIC_API_KEY (如果还未设置)")
+        print("  1. 设置 DEEPSEEK_API_KEY (如果还未设置)")
+        print("     export DEEPSEEK_API_KEY='your-api-key'")
         print("  2. 运行测试模式: python ai_trading/ai_trader_bot.py --test")
-        print("  3. 运行正常模式: python ai_trading/ai_trader_bot.py")
+        print("  3. 运行正常模式: python ai_trading/ai_trader_bot.py --model deepseek-reasoner")
     else:
         print("\n⚠️ 部分测试失败，请检查相关配置")
     

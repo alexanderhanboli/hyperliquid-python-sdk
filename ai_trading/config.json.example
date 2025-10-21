@@ -12,8 +12,8 @@
     "min": 5
   },
   "ai_model": {
-    "provider": "anthropic",
-    "model": "claude-sonnet-4-20250514",
+    "provider": "deepseek",
+    "model": "deepseek-reasoner",
     "temperature": 0.7,
     "max_tokens": 4096
   },
