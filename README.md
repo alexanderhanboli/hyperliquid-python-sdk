@@ -27,6 +27,47 @@ pip install hyperliquid-python-sdk
 ### [Optional] Generate a new API key for an API Wallet
 Generate and authorize a new API private key on https://app.hyperliquid.xyz/API, and set the API wallet's private key as the `secret_key` in examples/config.json. Note that you must still set the public key of the main wallet *not* the API wallet as the `account_address` in examples/config.json
 
+## 🤖 NEW: AI Trading Bot System
+
+We've added a complete AI-powered trading system that replicates the [nof1.ai](https://nof1.ai/) architecture using **Claude Sonnet 4.5**!
+
+### Quick Start
+```bash
+# Install dependencies
+pip install numpy pandas anthropic schedule
+
+# Set up API key
+export ANTHROPIC_API_KEY='your-api-key'
+
+# Run test
+python ai_trading/test_system.py
+
+# Start the bot (test mode - runs once)
+python ai_trading/ai_trader_bot.py --test
+
+# Start the bot (normal mode - runs every 3 minutes)
+python ai_trading/ai_trader_bot.py
+```
+
+### Features
+- ✅ Automatic market data collection and technical indicators (EMA, MACD, RSI, ATR)
+- ✅ AI-driven trading decisions using Claude Sonnet 4.5
+- ✅ Automatic risk management with stop-loss and take-profit
+- ✅ Multi-coin support (BTC, ETH, SOL, BNB, XRP, DOGE, etc.)
+- ✅ Testnet support for safe practice
+
+### Documentation
+- **[AI_TRADING_GUIDE.md](AI_TRADING_GUIDE.md)** - Complete usage guide ⭐
+- **[ai_trading/README.md](ai_trading/README.md)** - System architecture
+- **[ai_trading/PROJECT_SUMMARY.md](ai_trading/PROJECT_SUMMARY.md)** - Project summary
+
+### Interactive Demo
+```bash
+python ai_trading_demo.py
+```
+
+---
+
 ## Usage Examples
 ```python
 from hyperliquid.info import Info

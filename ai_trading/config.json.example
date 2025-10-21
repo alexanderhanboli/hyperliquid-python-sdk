@@ -1,0 +1,27 @@
+{
+  "coins": ["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE"],
+  "interval_minutes": 3,
+  "use_testnet": true,
+  "initial_capital": 10000.0,
+  "risk_per_trade_pct": 2.0,
+  "max_positions": 6,
+  "min_risk_reward_ratio": 2.0,
+  "leverage": {
+    "default": 10,
+    "max": 40,
+    "min": 5
+  },
+  "ai_model": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "temperature": 0.7,
+    "max_tokens": 4096
+  },
+  "trading_rules": {
+    "no_pyramiding": true,
+    "always_use_stop_loss": true,
+    "always_use_take_profit": true,
+    "min_order_value_usd": 10.0
+  }
+}
+

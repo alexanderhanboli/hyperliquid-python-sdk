@@ -1,0 +1,97 @@
+USER_PROMPT
+It has been 0 minutes since you started trading. The current time is 2025-10-21 16:26:48 and you've been invoked 1 times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
+
+ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+
+Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3-minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+
+CURRENT MARKET STATE FOR ALL COINS
+
+ALL BTC DATA
+current_price = 107798, current_ema20 = 107919, current_macd = 15.822, current_rsi (7 period) = 29.336
+
+Intraday series (3-minute intervals, oldest → latest):
+
+BTC mid prices: [107979.000, 108000.000]
+
+EMA indicators (20-period): [107878.406, 107891.891]
+
+MACD indicators: [52.408, 55.997]
+
+RSI indicators (7-Period): [62.512, 63.321]
+
+RSI indicators (14-Period): [61.140, 61.542]
+
+HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+Current Total Return (percent): 11.88%
+
+Available Cash: 4927.64
+
+Current Account Value: 11187.63
+
+No current positions.
+
+INSTRUCTIONS:
+Based on the market data above, make your trading decisions. For each coin, you can:
+1. ENTRY - Enter a new position (if you have no position)
+2. HOLD - Keep your current position
+3. CLOSE - Close your current position
+
+Return your decisions in the following JSON format:
+
+For ENTRY:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "entry",
+      "is_buy": true/false,
+      "quantity": <float>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int 5-40>,
+      "confidence": <0-1>,
+      "risk_usd": <float>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+For HOLD:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "hold",
+      "quantity": <full current size>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int>,
+      "confidence": <0-1>,
+      "risk_usd": <float>
+    }
+  }
+}
+
+For CLOSE:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "close",
+      "quantity": <full position size>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+IMPORTANT RULES:
+1. No pyramiding - you cannot add to existing positions
+2. Always set stop loss and take profit for entries
+3. Risk management is critical - use appropriate position sizing
+4. Leverage range: 5x to 40x
+5. Only enter if the risk/reward ratio is favorable (at least 1:2)
+
+Please analyze the data and return your trading decisions in valid JSON format.
