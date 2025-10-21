@@ -58,8 +58,17 @@ python ai_trading/ai_trader_bot.py
 
 ### Documentation
 - **[AI_TRADING_GUIDE.md](AI_TRADING_GUIDE.md)** - Complete usage guide ⭐
+- **[HOSTINGER_DEPLOYMENT.md](HOSTINGER_DEPLOYMENT.md)** - Deploy to Hostinger VPS (24/7) 🚀
 - **[ai_trading/README.md](ai_trading/README.md)** - System architecture
 - **[ai_trading/PROJECT_SUMMARY.md](ai_trading/PROJECT_SUMMARY.md)** - Project summary
+
+### Deploy to Cloud (24/7 Trading)
+Run your bot on Hostinger VPS with one command:
+```bash
+wget https://raw.githubusercontent.com/alexanderhanboli/hyperliquid-python-sdk/testnet/deploy/quick_deploy.sh
+bash quick_deploy.sh
+```
+See [HOSTINGER_DEPLOYMENT.md](HOSTINGER_DEPLOYMENT.md) for details.
 
 ### Interactive Demo
 ```bash
