@@ -1,0 +1,546 @@
+USER_PROMPT
+It has been 0 minutes since you started trading. The current time is 2025-10-22 07:48:32 and you've been invoked 1 times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
+
+ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+
+Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3-minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+
+CURRENT MARKET STATE FOR ALL COINS
+
+ALL ETH DATA
+current_price = 3873.3, current_ema20 = 3869.9, current_macd = 0.824194, current_rsi (7 period) = 58.065
+
+Intraday series (3-minute intervals, oldest → latest):
+
+ETH mid prices: [3867.900, 3867.800, 3871.300, 3872.300, 3872.000, 3869.600, 3870.300, 3875.800, 3873.700, 3873.300]
+
+EMA indicators (20-period): [3866.589, 3866.704, 3867.142, 3867.633, 3868.049, 3868.197, 3868.397, 3869.102, 3869.540, 3869.898]
+
+MACD indicators: [-3.076, -2.581, -1.885, -1.239, -0.742, -0.536, -0.312, 0.305, 0.618, 0.824]
+
+RSI indicators (7-Period): [43.403, 49.801, 55.944, 96.591, 97.701, 85.859, 86.341, 79.259, 69.032, 58.065]
+
+RSI indicators (14-Period): [36.047, 38.847, 41.766, 44.258, 46.835, 48.684, 47.581, 54.846, 57.143, 56.585]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 3936.85 vs. 50-Period EMA: 3946.67
+
+3-Period ATR: 73.9 vs. 14-Period ATR: 89.6429
+
+Current Volume: 0.287 vs. Average Volume: 22.199
+
+MACD indicators: [35.572, 33.835, 27.598, 20.162, 13.844, 24.013, 25.468, 16.218, 7.510, 1.017]
+
+RSI indicators (14-Period): [68.273, 69.401, 57.162, 52.004, 49.176, 69.050, 57.749, 42.664, 40.700, 41.618]
+
+ALL BTC DATA
+current_price = 110548, current_ema20 = 109925, current_macd = 145.773, current_rsi (7 period) = 55.795
+
+Intraday series (3-minute intervals, oldest → latest):
+
+BTC mid prices: [109992.000, 109992.000, 110107.000, 110107.000, 110125.000, 110190.000, 108508.000, 110237.000, 110438.000, 110548.000]
+
+EMA indicators (20-period): [109735.386, 109759.826, 109792.890, 109822.805, 109851.586, 109883.816, 109752.786, 109798.901, 109859.768, 109925.314]
+
+MACD indicators: [88.962, 99.715, 116.178, 127.752, 136.800, 147.515, 20.053, 57.886, 102.902, 145.773]
+
+RSI indicators (7-Period): [47.238, 63.114, 47.448, 47.789, 48.030, 100.000, 10.532, 53.394, 55.853, 55.795]
+
+RSI indicators (14-Period): [47.975, 48.031, 48.416, 55.568, 47.777, 58.583, 39.848, 49.246, 60.168, 51.560]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 110470 vs. 50-Period EMA: 110395
+
+3-Period ATR: 3780.67 vs. 14-Period ATR: 3304.29
+
+Current Volume: 0.002 vs. Average Volume: 2.964
+
+MACD indicators: [316.720, 427.590, 475.359, 479.687, 405.257, 693.083, 966.530, 866.621, 768.018, 672.918]
+
+RSI indicators (14-Period): [77.614, 81.840, 76.717, 72.695, 64.325, 79.790, 79.295, 58.110, 56.371, 56.908]
+
+ALL SOL DATA
+current_price = 185.36, current_ema20 = 185.113, current_macd = 0.0471382, current_rsi (7 period) = 81.081
+
+Intraday series (3-minute intervals, oldest → latest):
+
+SOL mid prices: [184.840, 184.820, 184.900, 185.010, 185.010, 185.090, 185.180, 185.500, 185.420, 185.360]
+
+EMA indicators (20-period): [184.990, 184.974, 184.967, 184.971, 184.975, 184.986, 185.004, 185.052, 185.087, 185.113]
+
+MACD indicators: [-0.121, -0.120, -0.112, -0.095, -0.081, -0.063, -0.040, 0.003, 0.031, 0.047]
+
+RSI indicators (7-Period): [58.696, 56.250, 62.500, 61.818, 66.667, 82.353, 80.000, 97.143, 89.474, 81.081]
+
+RSI indicators (14-Period): [42.697, 31.579, 36.364, 32.414, 32.414, 54.455, 57.798, 81.897, 76.613, 73.077]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 187.903 vs. 50-Period EMA: 186.567
+
+3-Period ATR: 4.59 vs. 14-Period ATR: 5.09143
+
+Current Volume: 0.100 vs. Average Volume: 217.300
+
+MACD indicators: [2.894, 2.844, 2.419, 1.988, 1.742, 2.339, 2.586, 2.076, 1.601, 1.182]
+
+RSI indicators (14-Period): [59.432, 64.373, 53.508, 51.596, 50.342, 65.651, 58.092, 44.617, 46.004, 46.742]
+
+ALL AAVE DATA
+current_price = 217.43, current_ema20 = 217.85, current_macd = -0.102037, current_rsi (7 period) = 35.789
+
+Intraday series (3-minute intervals, oldest → latest):
+
+AAVE mid prices: [217.700, 217.700, 217.700, 217.700, 217.700, 218.040, 218.040, 218.040, 218.040, 217.430]
+
+EMA indicators (20-period): [217.883, 217.866, 217.850, 217.836, 217.823, 217.844, 217.862, 217.879, 217.895, 217.850]
+
+MACD indicators: [-0.251, -0.236, -0.221, -0.207, -0.194, -0.154, -0.121, -0.094, -0.072, -0.102]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 100.000, 100.000, 100.000, 100.000, 35.789]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 100.000, 100.000, 100.000, 100.000, 35.789]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 222.837 vs. 50-Period EMA: 228.402
+
+3-Period ATR: 6.04333 vs. 14-Period ATR: 5.025
+
+Current Volume: 0.120 vs. Average Volume: 36.629
+
+MACD indicators: [0.146, 0.378, 0.215, -0.259, -0.628, -0.406, 0.089, -0.420, -0.934, -1.321]
+
+RSI indicators (14-Period): [78.583, 77.851, 63.719, 56.543, 55.043, 61.590, 62.514, 49.910, 44.539, 44.612]
+
+ALL BNB DATA
+current_price = 1070.1, current_ema20 = 1068.68, current_macd = 0.570471, current_rsi (7 period) = 56.250
+
+Intraday series (3-minute intervals, oldest → latest):
+
+BNB mid prices: [1064.900, 1064.900, 1069.500, 1070.000, 1069.500, 1069.100, 1069.200, 1070.100, 1071.300, 1070.100]
+
+EMA indicators (20-period): [1067.391, 1067.154, 1067.377, 1067.627, 1067.805, 1067.929, 1068.050, 1068.245, 1068.536, 1068.685]
+
+MACD indicators: [-0.635, -0.748, -0.462, -0.192, -0.019, 0.085, 0.174, 0.313, 0.514, 0.570]
+
+RSI indicators (7-Period): [1.961, 2.632, 55.422, 71.831, 91.071, 85.000, 85.246, 87.143, 89.024, 56.250]
+
+RSI indicators (14-Period): [38.776, 25.620, 47.826, 48.148, 42.581, 48.889, 43.443, 51.240, 61.667, 55.725]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 1093.54 vs. 50-Period EMA: 1130.51
+
+3-Period ATR: 21 vs. 14-Period ATR: 19.5643
+
+Current Volume: 0.730 vs. Average Volume: 5.959
+
+MACD indicators: [-11.656, -11.534, -12.408, -14.052, -14.812, -12.551, -12.105, -14.513, -15.228, -15.504]
+
+RSI indicators (14-Period): [48.846, 55.420, 46.558, 43.439, 48.180, 58.463, 47.954, 34.370, 35.703, 38.841]
+
+ALL APT DATA
+current_price = 3.2142, current_ema20 = 3.21908, current_macd = -0.00342103, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+APT mid prices: [3.217, 3.217, 3.217, 3.217, 3.217, 3.217, 3.217, 3.217, 3.217, 3.214]
+
+EMA indicators (20-period): [3.223, 3.223, 3.222, 3.221, 3.221, 3.221, 3.220, 3.220, 3.220, 3.219]
+
+MACD indicators: [-0.005, -0.004, -0.004, -0.004, -0.004, -0.004, -0.004, -0.004, -0.003, -0.003]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [8.370, 8.370, 8.370, 8.370, 8.370, 100.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 3.24109 vs. 50-Period EMA: 3.35617
+
+3-Period ATR: 0.0963 vs. 14-Period ATR: 0.0743571
+
+Current Volume: 472.660 vs. Average Volume: 571.133
+
+MACD indicators: [-0.043, -0.038, -0.041, -0.045, -0.049, -0.035, -0.024, -0.024, -0.024, -0.024]
+
+RSI indicators (14-Period): [72.711, 73.356, 47.480, 42.814, 43.413, 67.044, 65.866, 48.541, 50.000, 49.537]
+
+ALL NEAR DATA
+current_price = 2.1962, current_ema20 = 2.19671, current_macd = -0.000549076, current_rsi (7 period) = 47.200
+
+Intraday series (3-minute intervals, oldest → latest):
+
+NEAR mid prices: [2.194, 2.194, 2.197, 2.197, 2.197, 2.197, 2.197, 2.203, 2.203, 2.196]
+
+EMA indicators (20-period): [2.195, 2.194, 2.195, 2.195, 2.195, 2.195, 2.195, 2.196, 2.197, 2.197]
+
+MACD indicators: [-0.005, -0.005, -0.004, -0.003, -0.003, -0.002, -0.002, -0.001, -0.001, -0.001]
+
+RSI indicators (7-Period): [48.276, 70.504, 75.740, 100.000, 100.000, 100.000, 100.000, 100.000, 100.000, 47.200]
+
+RSI indicators (14-Period): [43.865, 34.875, 41.158, 41.158, 46.715, 54.936, 54.936, 64.041, 82.018, 63.605]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 2.25055 vs. 50-Period EMA: 2.29422
+
+3-Period ATR: 0.0707333 vs. 14-Period ATR: 0.0344071
+
+Current Volume: 453.800 vs. Average Volume: 1895.674
+
+MACD indicators: [-0.003, -0.003, -0.002, -0.002, -0.001, 0.007, 0.013, 0.007, 0.002, -0.004]
+
+RSI indicators (14-Period): [77.962, 72.482, 72.482, 72.482, 72.482, 79.728, 77.513, 53.236, 44.512, 42.759]
+
+ALL DOGE DATA
+current_price = 0.19114, current_ema20 = 0.191513, current_macd = -0.000147671, current_rsi (7 period) = 18.644
+
+Intraday series (3-minute intervals, oldest → latest):
+
+DOGE mid prices: [0.191, 0.191, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.191]
+
+EMA indicators (20-period): [0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192, 0.192]
+
+MACD indicators: [-0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000]
+
+RSI indicators (7-Period): [100.000, 50.000, 100.000, 100.000, 100.000, 100.000, 100.000, 100.000, 100.000, 18.644]
+
+RSI indicators (14-Period): [55.172, 38.824, 39.535, 100.000, 100.000, 100.000, 100.000, 100.000, 100.000, 34.247]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.195575 vs. 50-Period EMA: 0.196351
+
+3-Period ATR: 0.00502 vs. 14-Period ATR: 0.00426643
+
+Current Volume: 1195.000 vs. Average Volume: 23641.920
+
+MACD indicators: [0.002, 0.002, 0.002, 0.001, 0.001, 0.002, 0.002, 0.001, 0.001, 0.000]
+
+RSI indicators (14-Period): [79.876, 80.451, 69.329, 60.287, 56.425, 71.008, 61.902, 46.873, 43.332, 43.273]
+
+ALL FARTCOIN DATA
+current_price = 0.35496, current_ema20 = 0.360378, current_macd = -0.00308969, current_rsi (7 period) = 7.593
+
+Intraday series (3-minute intervals, oldest → latest):
+
+FARTCOIN mid prices: [0.366, 0.366, 0.366, 0.355, 0.354, 0.354, 0.354, 0.354, 0.355, 0.355]
+
+EMA indicators (20-period): [0.366, 0.366, 0.366, 0.365, 0.364, 0.363, 0.362, 0.362, 0.361, 0.360]
+
+MACD indicators: [0.000, 0.000, 0.000, -0.001, -0.002, -0.002, -0.003, -0.003, -0.003, -0.003]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 0.000, 0.000, 0.000, 0.000, 0.000, 7.868, 7.593]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 0.000, 0.000, 0.000, 0.000, 0.000, 7.868, 7.593]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.374035 vs. 50-Period EMA: 0.38803
+
+3-Period ATR: 0.0115967 vs. 14-Period ATR: 0.00847857
+
+Current Volume: 447.800 vs. Average Volume: 1815.228
+
+MACD indicators: [-0.006, -0.005, -0.006, -0.006, -0.006, -0.006, -0.004, -0.004, -0.004, -0.005]
+
+RSI indicators (14-Period): [50.188, 58.809, 53.518, 54.282, 51.176, 51.516, 64.255, 53.122, 43.257, 37.124]
+
+ALL ARB DATA
+current_price = 0.30628, current_ema20 = 0.306161, current_macd = -1.39351e-05, current_rsi (7 period) = 60.185
+
+Intraday series (3-minute intervals, oldest → latest):
+
+ARB mid prices: [0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.307, 0.306]
+
+EMA indicators (20-period): [0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306, 0.306]
+
+MACD indicators: [-0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 100.000, 60.185]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 100.000, 60.185]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.316248 vs. 50-Period EMA: 0.321105
+
+3-Period ATR: 0.00709333 vs. 14-Period ATR: 0.00635214
+
+Current Volume: 1706.600 vs. Average Volume: 3541.608
+
+MACD indicators: [0.000, 0.000, 0.000, -0.000, -0.001, 0.000, 0.001, 0.000, -0.001, -0.001]
+
+RSI indicators (14-Period): [66.181, 67.712, 60.609, 52.890, 49.978, 65.877, 59.389, 44.584, 43.645, 42.318]
+
+ALL ATOM DATA
+current_price = 3.1622, current_ema20 = 3.17019, current_macd = -0.0032881, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+ATOM mid prices: [3.170, 3.170, 3.170, 3.170, 3.170, 3.170, 3.170, 3.170, 3.170, 3.162]
+
+EMA indicators (20-period): [3.173, 3.173, 3.172, 3.172, 3.172, 3.172, 3.171, 3.171, 3.171, 3.170]
+
+MACD indicators: [-0.005, -0.005, -0.004, -0.004, -0.004, -0.004, -0.003, -0.003, -0.003, -0.003]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 3.23903 vs. 50-Period EMA: 3.29157
+
+3-Period ATR: 0.0676333 vs. 14-Period ATR: 0.0480714
+
+Current Volume: 12.410 vs. Average Volume: 737.430
+
+MACD indicators: [-0.010, -0.007, -0.009, -0.011, -0.014, -0.004, 0.000, -0.006, -0.009, -0.015]
+
+RSI indicators (14-Period): [69.082, 69.082, 58.431, 53.656, 52.656, 75.157, 66.127, 42.752, 45.750, 40.379]
+
+ALL CAKE DATA
+current_price = 2.7382, current_ema20 = 2.7971, current_macd = -0.00519316, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+CAKE mid prices: [2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.738]
+
+EMA indicators (20-period): [2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.803, 2.797]
+
+MACD indicators: [0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, -0.005]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 2.86553 vs. 50-Period EMA: 2.97679
+
+3-Period ATR: 0.0530667 vs. 14-Period ATR: 0.0568286
+
+Current Volume: 115.600 vs. Average Volume: 147.484
+
+MACD indicators: [-0.052, -0.047, -0.043, -0.040, -0.054, -0.047, -0.042, -0.044, -0.046, -0.052]
+
+RSI indicators (14-Period): [57.122, 66.397, 63.216, 63.216, 28.786, 53.956, 51.542, 44.283, 44.283, 40.352]
+
+ALL ASTER DATA
+current_price = 1.0989, current_ema20 = 1.16804, current_macd = -0.0333366, current_rsi (7 period) = 0.779
+
+Intraday series (3-minute intervals, oldest → latest):
+
+ASTER mid prices: [1.225, 1.225, 1.225, 1.225, 1.098, 1.098, 1.098, 1.099, 1.099, 1.099]
+
+EMA indicators (20-period): [1.225, 1.225, 1.225, 1.225, 1.213, 1.202, 1.192, 1.183, 1.175, 1.168]
+
+MACD indicators: [0.000, 0.000, 0.000, 0.000, -0.010, -0.018, -0.024, -0.028, -0.031, -0.033]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 0.000, 0.000, 0.000, 0.779, 0.779, 0.779]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 0.000, 0.000, 0.000, 0.779, 0.779, 0.779]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 1.22502 vs. 50-Period EMA: 1.27645
+
+3-Period ATR: 0.0427 vs. 14-Period ATR: 0.06815
+
+Current Volume: 138.000 vs. Average Volume: 4753.280
+
+MACD indicators: [-0.025, -0.029, -0.028, -0.026, -0.029, -0.027, -0.025, -0.023, -0.022, -0.030]
+
+RSI indicators (14-Period): [32.540, 40.526, 45.652, 44.600, 40.181, 44.950, 43.763, 44.109, 41.692, 34.110]
+
+ALL SUI DATA
+current_price = 2.415, current_ema20 = 2.41925, current_macd = -0.0034073, current_rsi (7 period) = 43.704
+
+Intraday series (3-minute intervals, oldest → latest):
+
+SUI mid prices: [2.417, 2.417, 2.417, 2.417, 2.417, 2.423, 2.423, 2.423, 2.423, 2.415]
+
+EMA indicators (20-period): [2.419, 2.419, 2.419, 2.418, 2.418, 2.419, 2.419, 2.419, 2.420, 2.419]
+
+MACD indicators: [-0.009, -0.009, -0.008, -0.007, -0.007, -0.006, -0.005, -0.004, -0.003, -0.003]
+
+RSI indicators (7-Period): [100.000, 50.000, 50.000, 50.000, 50.000, 100.000, 100.000, 100.000, 100.000, 43.704]
+
+RSI indicators (14-Period): [73.022, 55.090, 53.704, 100.000, 100.000, 100.000, 100.000, 100.000, 100.000, 43.704]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 2.54717 vs. 50-Period EMA: 2.60242
+
+3-Period ATR: 0.0856667 vs. 14-Period ATR: 0.0526714
+
+Current Volume: 28.500 vs. Average Volume: 245.548
+
+MACD indicators: [-0.012, -0.010, -0.010, -0.014, -0.018, -0.008, -0.001, 0.005, -0.005, -0.016]
+
+RSI indicators (14-Period): [60.054, 61.123, 52.402, 49.676, 51.859, 63.724, 55.627, 51.154, 36.852, 33.981]
+
+ALL AVNT DATA
+current_price = 0.6117, current_ema20 = 0.643638, current_macd = -0.00281595, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+AVNT mid prices: [0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.612]
+
+EMA indicators (20-period): [0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.647, 0.644]
+
+MACD indicators: [0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, -0.003]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.57659 vs. 50-Period EMA: 0.580494
+
+3-Period ATR: 0.0117667 vs. 14-Period ATR: 0.0190071
+
+Current Volume: 7728.000 vs. Average Volume: 692.340
+
+MACD indicators: [-0.018, -0.012, -0.006, -0.002, 0.001, 0.004, 0.011, 0.017, 0.021, 0.021]
+
+RSI indicators (14-Period): [68.774, 68.317, 68.317, 68.317, 76.461, 79.707, 86.052, 84.814, 84.814, 72.680]
+
+HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+Current Total Return (percent): 0.02%
+
+Available Cash: -0.97
+
+Current Account Value: 987.12
+
+No current positions.
+
+Sharpe Ratio: 0.000
+
+INSTRUCTIONS:
+Based on the market data above, make your trading decisions. For each coin, you can:
+1. ENTRY - Enter a new position (if you have no position)
+2. HOLD - Keep your current position
+3. CLOSE - Close your current position
+
+Return your decisions in the following JSON format:
+
+For ENTRY:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "entry",
+      "is_buy": true/false,
+      "quantity": <float>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int 5-40>,
+      "confidence": <0-1>,
+      "risk_usd": <float>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+For HOLD:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "hold",
+      "quantity": <full current size>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int>,
+      "confidence": <0-1>,
+      "risk_usd": <float>
+    }
+  }
+}
+
+For CLOSE:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "close",
+      "quantity": <full position size>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+IMPORTANT RULES:
+1. No pyramiding - you cannot add to existing positions
+2. Always set stop loss and take profit for entries
+3. Risk management is critical - use appropriate position sizing
+4. Leverage range: 5x to 40x
+5. Only enter if the risk/reward ratio is favorable (at least 1:2)
+
+TAKE PROFIT & STOP LOSS GUIDELINES:
+Follow professional trading practices to maximize profitability while managing risk effectively:
+
+1. USE ATR-BASED DYNAMIC STOPS (RECOMMENDED APPROACH):
+   ATR (Average True Range) measures market volatility and helps set intelligent stops/targets.
+   You are provided with both 3-Period ATR (short-term) and 14-Period ATR (standard).
+   
+   Professional ATR-based formula:
+   - STOP LOSS: Entry ± (1.5 to 2.0) × 14-Period ATR
+   - TAKE PROFIT: Entry ± (3.0 to 4.0) × 14-Period ATR
+   
+   This approach:
+   - Automatically adapts to market volatility (high volatility = wider stops, low volatility = tighter stops)
+   - Typically results in 4-6% take profit targets for crypto markets
+   - Maintains healthy 1:2 or better risk/reward ratios
+   - Avoids premature stop-outs during normal price fluctuations
+
+2. RISK/REWARD RATIO (MANDATORY):
+   - MUST maintain at least 1:2 ratio (e.g., 2% stop loss → 4% take profit minimum)
+   - Professional traders prefer 1:2.5 or 1:3 ratios when market conditions allow
+   - Never enter a trade with worse than 1:2 risk/reward
+
+3. TAKE PROFIT TARGETS:
+   - Recommended range: 4% - 6% from entry price
+   - This range is realistic for crypto markets in 3-minute intervals
+   - Can be extended beyond 6% if ATR and market momentum justify it
+   - Prioritize probability of profit over maximum profit
+
+4. STOP LOSS SETTINGS:
+   - Recommended range: 1.5% - 3% from entry price
+   - Must provide enough room for normal price fluctuations (use ATR as guide)
+   - Tighter stops (1.5-2%) for low volatility, wider stops (2-3%) for high volatility
+   
+5. PRACTICAL EXAMPLE (ATR-Based Trading):
+   Scenario: BNB trading at $1000, 14-Period ATR = $20
+   
+   For a LONG position:
+   - Stop Loss: $1000 - (2.0 × $20) = $960 (4% below entry, or 2.0 × ATR)
+   - Take Profit: $1000 + (4.0 × $20) = $1080 (8% above entry, or 4.0 × ATR)
+   - Risk/Reward: 4% risk for 8% profit = 1:2 ratio ✅
+   
+   For a SHORT position:
+   - Stop Loss: $1000 + (2.0 × $20) = $1040 (4% above entry, or 2.0 × ATR)
+   - Take Profit: $1000 - (4.0 × $20) = $920 (8% below entry, or 4.0 × ATR)
+   - Risk/Reward: 4% risk for 8% profit = 1:2 ratio ✅
+   
+   Note: With lower volatility (e.g., ATR = $10), the same formula gives tighter stops/targets:
+   - Stop Loss: $1000 ± $20 (2% move, or 2.0 × ATR)
+   - Take Profit: $1000 ± $40 (4% move, or 4.0 × ATR)
+   - This demonstrates how ATR naturally adapts to market conditions
+
+6. POSITION SIZING WITH STOP LOSS:
+   - Calculate position size based on your risk_usd and stop loss distance
+   - Formula: Position Size = risk_usd / (entry_price × stop_loss_percent)
+   - Example: $20 risk with 2% stop loss on $1000 BNB → Position Size = 20 / (1000 × 0.02) = 1.0 BNB
+   - This ensures consistent risk management across all trades
+
+Please analyze the data and return your trading decisions in valid JSON format.

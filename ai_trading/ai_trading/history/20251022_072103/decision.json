@@ -1,0 +1,17 @@
+{
+  "XAI": {
+    "trade_signal_args": {
+      "coin": "XAI",
+      "signal": "entry",
+      "is_buy": true,
+      "quantity": 17544,
+      "profit_target": 0.028,
+      "stop_loss": 0.0255,
+      "invalidation_condition": "If price fails to move above 0.0265 within 30 minutes or volume decreases below 50000",
+      "leverage": 10,
+      "confidence": 0.7,
+      "risk_usd": 10,
+      "justification": "XAI is oversold with RSI at 20.4 on the 4-hour chart and a massive volume spike indicating potential reversal. Entering long with a favorable risk/reward ratio of approximately 1:3.4, targeting a move back to the EMA20 level."
+    }
+  }
+}

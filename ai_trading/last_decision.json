@@ -1,0 +1,15 @@
+{
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "hold",
+      "quantity": 0.078,
+      "profit_target": 4066.93,
+      "stop_loss": 3696.84,
+      "invalidation_condition": "If price closes below 3696.84 on 3-minute chart",
+      "leverage": 10,
+      "confidence": 0.7,
+      "risk_usd": 9.62
+    }
+  }
+}

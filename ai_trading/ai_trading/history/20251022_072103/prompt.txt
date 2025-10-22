@@ -1,0 +1,138 @@
+USER_PROMPT
+It has been 0 minutes since you started trading. The current time is 2025-10-22 07:21:05 and you've been invoked 1 times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
+
+ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+
+Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3-minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+
+CURRENT MARKET STATE FOR ALL COINS
+
+ALL kLUNC DATA
+current_price = 0.045278, current_ema20 = 0.0456018, current_macd = -2.80722e-05, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+kLUNC mid prices: [0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.045]
+
+EMA indicators (20-period): [0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046, 0.046]
+
+MACD indicators: [0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, -0.000]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.0447815 vs. 50-Period EMA: 0.0479278
+
+3-Period ATR: 0.00184367 vs. 14-Period ATR: 0.000535071
+
+Current Volume: 904.000 vs. Average Volume: 399.640
+
+MACD indicators: [-0.003, -0.003, -0.003, -0.003, -0.003, -0.003, -0.002, -0.002, -0.002, -0.002]
+
+RSI indicators (14-Period): [15.231, 15.217, 15.217, 15.217, 14.546, 76.389, 74.351, 86.812, 88.404, 80.229]
+
+ALL XAI DATA
+current_price = 0.02607, current_ema20 = 0.0278705, current_macd = -0.000158746, current_rsi (7 period) = 0.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+XAI mid prices: [0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.026]
+
+EMA indicators (20-period): [0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028]
+
+MACD indicators: [0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, -0.000]
+
+RSI indicators (7-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 0.000]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 0.0275722 vs. 50-Period EMA: 0.0276324
+
+3-Period ATR: 0.000833333 vs. 14-Period ATR: 0.000178571
+
+Current Volume: 99983.900 vs. Average Volume: 6970.824
+
+MACD indicators: [-0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000, -0.000]
+
+RSI indicators (14-Period): [50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 50.000, 100.000, 100.000, 20.400]
+
+HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+Current Total Return (percent): 0.00%
+
+Available Cash: 990.08
+
+Current Account Value: 990.08
+
+No current positions.
+
+Sharpe Ratio: 0.000
+
+INSTRUCTIONS:
+Based on the market data above, make your trading decisions. For each coin, you can:
+1. ENTRY - Enter a new position (if you have no position)
+2. HOLD - Keep your current position
+3. CLOSE - Close your current position
+
+Return your decisions in the following JSON format:
+
+For ENTRY:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "entry",
+      "is_buy": true/false,
+      "quantity": <float>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int 5-40>,
+      "confidence": <0-1>,
+      "risk_usd": <float>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+For HOLD:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "hold",
+      "quantity": <full current size>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int>,
+      "confidence": <0-1>,
+      "risk_usd": <float>
+    }
+  }
+}
+
+For CLOSE:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "close",
+      "quantity": <full position size>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+IMPORTANT RULES:
+1. No pyramiding - you cannot add to existing positions
+2. Always set stop loss and take profit for entries
+3. Risk management is critical - use appropriate position sizing
+4. Leverage range: 5x to 40x
+5. Only enter if the risk/reward ratio is favorable (at least 1:2)
+
+Please analyze the data and return your trading decisions in valid JSON format.

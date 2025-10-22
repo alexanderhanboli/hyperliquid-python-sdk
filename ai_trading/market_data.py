@@ -109,6 +109,140 @@ class TechnicalIndicators:
         atr = df['tr'].rolling(window=period).mean()
         
         return float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0
+    
+    @staticmethod
+    def detect_rsi_divergence(prices: List[float], rsi_values: List[float], window: int = 5) -> Dict[str, Any]:
+        """
+        检测 RSI 背离信号
+        
+        Args:
+            prices: 价格序列
+            rsi_values: RSI 值序列
+            window: 检测窗口大小
+        
+        Returns:
+            {
+                "has_divergence": bool,
+                "divergence_type": "bullish" / "bearish" / None,
+                "divergence_strength": "strong" / "moderate" / "weak",
+                "description": str
+            }
+        """
+        if len(prices) < window * 2 or len(rsi_values) < window * 2:
+            return {
+                "has_divergence": False,
+                "divergence_type": None,
+                "divergence_strength": None,
+                "description": "数据不足"
+            }
+        
+        # 找到局部高点和低点
+        def find_peaks_and_troughs(data: List[float], window: int = 3):
+            peaks = []  # (index, value)
+            troughs = []  # (index, value)
+            
+            for i in range(window, len(data) - window):
+                # 检查是否是局部高点
+                if all(data[i] >= data[i-j] for j in range(1, window+1)) and \
+                   all(data[i] >= data[i+j] for j in range(1, window+1)):
+                    peaks.append((i, data[i]))
+                
+                # 检查是否是局部低点
+                if all(data[i] <= data[i-j] for j in range(1, window+1)) and \
+                   all(data[i] <= data[i+j] for j in range(1, window+1)):
+                    troughs.append((i, data[i]))
+            
+            return peaks, troughs
+        
+        price_peaks, price_troughs = find_peaks_and_troughs(prices, window=3)
+        rsi_peaks, rsi_troughs = find_peaks_and_troughs(rsi_values, window=3)
+        
+        # 检测顶背离 (Bearish Divergence)
+        bearish_divergence = None
+        if len(price_peaks) >= 2 and len(rsi_peaks) >= 2:
+            # 取最后两个高点
+            price_peak1, price_peak2 = price_peaks[-2], price_peaks[-1]
+            
+            # 找到对应的 RSI 高点
+            rsi_near_peak1 = None
+            rsi_near_peak2 = None
+            
+            for rsi_idx, rsi_val in rsi_peaks:
+                if abs(rsi_idx - price_peak1[0]) <= 2:
+                    rsi_near_peak1 = (rsi_idx, rsi_val)
+                if abs(rsi_idx - price_peak2[0]) <= 2:
+                    rsi_near_peak2 = (rsi_idx, rsi_val)
+            
+            if rsi_near_peak1 and rsi_near_peak2:
+                price_higher = price_peak2[1] > price_peak1[1]
+                rsi_lower = rsi_near_peak2[1] < rsi_near_peak1[1]
+                rsi_diff = abs(rsi_near_peak1[1] - rsi_near_peak2[1])
+                
+                if price_higher and rsi_lower:
+                    # 计算强度
+                    if rsi_diff > 10:
+                        strength = "strong"
+                    elif rsi_diff > 5:
+                        strength = "moderate"
+                    else:
+                        strength = "weak"
+                    
+                    bearish_divergence = {
+                        "has_divergence": True,
+                        "divergence_type": "bearish",
+                        "divergence_strength": strength,
+                        "description": f"价格从 {price_peak1[1]:.2f} 上涨至 {price_peak2[1]:.2f}，但 RSI 从 {rsi_near_peak1[1]:.1f} 下降至 {rsi_near_peak2[1]:.1f}，形成顶背离（RSI差异: {rsi_diff:.1f}）"
+                    }
+        
+        # 检测底背离 (Bullish Divergence)
+        bullish_divergence = None
+        if len(price_troughs) >= 2 and len(rsi_troughs) >= 2:
+            # 取最后两个低点
+            price_trough1, price_trough2 = price_troughs[-2], price_troughs[-1]
+            
+            # 找到对应的 RSI 低点
+            rsi_near_trough1 = None
+            rsi_near_trough2 = None
+            
+            for rsi_idx, rsi_val in rsi_troughs:
+                if abs(rsi_idx - price_trough1[0]) <= 2:
+                    rsi_near_trough1 = (rsi_idx, rsi_val)
+                if abs(rsi_idx - price_trough2[0]) <= 2:
+                    rsi_near_trough2 = (rsi_idx, rsi_val)
+            
+            if rsi_near_trough1 and rsi_near_trough2:
+                price_lower = price_trough2[1] < price_trough1[1]
+                rsi_higher = rsi_near_trough2[1] > rsi_near_trough1[1]
+                rsi_diff = abs(rsi_near_trough1[1] - rsi_near_trough2[1])
+                
+                if price_lower and rsi_higher:
+                    # 计算强度
+                    if rsi_diff > 10:
+                        strength = "strong"
+                    elif rsi_diff > 5:
+                        strength = "moderate"
+                    else:
+                        strength = "weak"
+                    
+                    bullish_divergence = {
+                        "has_divergence": True,
+                        "divergence_type": "bullish",
+                        "divergence_strength": strength,
+                        "description": f"价格从 {price_trough1[1]:.2f} 下跌至 {price_trough2[1]:.2f}，但 RSI 从 {rsi_near_trough1[1]:.1f} 上升至 {rsi_near_trough2[1]:.1f}，形成底背离（RSI差异: {rsi_diff:.1f}）"
+                    }
+        
+        # 返回最显著的背离
+        if bearish_divergence:
+            return bearish_divergence
+        elif bullish_divergence:
+            return bullish_divergence
+        else:
+            return {
+                "has_divergence": False,
+                "divergence_type": None,
+                "divergence_strength": None,
+                "description": "未检测到明显背离"
+            }
 
 
 class MarketDataFetcher:
@@ -126,6 +260,113 @@ class MarketDataFetcher:
             if coin in all_mids:
                 prices[coin] = float(all_mids[coin])
         return prices
+
+    def get_top_coins_by_market_cap(self, top_n: int) -> List[str]:
+        """
+        按交易量获取前N个币种（使用永续合约数据）
+
+        Args:
+            top_n: 返回前N个交易量最大的币种
+
+        Returns:
+            按日交易量（dayNtlVlm USD）降序排序的币种列表
+        
+        注意：使用 perp (永续合约) 数据，纯按日交易量USD排序，
+              确保选择流动性最好、交易最活跃的主流币种
+        """
+        try:
+            # 获取所有活跃交易的币种
+            all_mids = self.info.all_mids()
+            active_coins = set(all_mids.keys())
+
+            # 获取永续合约的元数据和资产上下文
+            perp_data = self.info.meta_and_asset_ctxs()
+
+            # perp_data[0] 包含 meta 信息（universe）
+            # perp_data[1] 包含资产上下文列表
+            meta = perp_data[0] if len(perp_data) > 0 else {'universe': []}
+            asset_ctxs = perp_data[1] if len(perp_data) > 1 else []
+
+            # 建立币种索引映射
+            coin_names = [asset['name'] for asset in meta.get('universe', [])]
+
+            # 收集所有币种的交易数据
+            coins_with_volume = []
+            
+            for idx, asset_ctx in enumerate(asset_ctxs):
+                try:
+                    # 获取币种名称（通过索引匹配）
+                    if idx >= len(coin_names):
+                        continue
+                    
+                    coin = coin_names[idx]
+
+                    # 只处理活跃交易的币种
+                    if coin not in active_coins:
+                        continue
+                    
+                    # 只处理支持K线数据的币种
+                    if coin not in self.info.name_to_coin:
+                        continue
+
+                    # 获取交易数据
+                    day_ntl_volume = float(asset_ctx.get('dayNtlVlm', 0))  # 日交易量 USD
+                    open_interest = float(asset_ctx.get('openInterest', 0))  # 未平仓合约
+                    mark_price = float(asset_ctx.get('markPx', 0))  # 标记价格
+                    
+                    # 过滤：必须有交易量
+                    if day_ntl_volume > 0:
+                        coin_data = {
+                            'coin': coin,
+                            'day_ntl_volume': day_ntl_volume,  # 日交易量（USD）
+                            'open_interest': open_interest,     # 未平仓合约
+                            'price': mark_price,
+                        }
+                        
+                        coins_with_volume.append(coin_data)
+                            
+                except (ValueError, KeyError, IndexError) as e:
+                    # 跳过数据格式错误的币种
+                    continue
+
+            # 按日交易量排序（USD）
+            coins_with_volume.sort(key=lambda x: x['day_ntl_volume'], reverse=True)
+            
+            # 打印统计信息
+            print(f"  ℹ️ 从 {len(coins_with_volume)} 个活跃 perp 币种中选择前 {top_n} 个")
+            
+            # 打印前几个币种的详细信息（用于调试）
+            if coins_with_volume:
+                print(f"  📊 Top 3: ", end="")
+                for i, coin_data in enumerate(coins_with_volume[:3]):
+                    print(f"{coin_data['coin']}(${coin_data['day_ntl_volume']/1e6:.1f}M)", end=" ")
+                print()
+
+            # 返回前N个币种
+            top_coins = [coin_data['coin'] for coin_data in coins_with_volume[:top_n]]
+
+            # 如果没有足够的数据，补充默认币种
+            if len(top_coins) < top_n:
+                default_coins = ["BTC", "ETH", "SOL", "ARB", "OP", "AVAX", "MATIC", "DOGE"]
+                for default_coin in default_coins:
+                    if default_coin not in top_coins and default_coin in active_coins:
+                        top_coins.append(default_coin)
+                        if len(top_coins) >= top_n:
+                            break
+            
+            # 确保至少返回一些币种
+            if not top_coins:
+                print("  ⚠️ 未找到活跃币种，使用默认列表")
+                return ["BTC", "ETH", "SOL"][:top_n]
+
+            return top_coins[:top_n]
+
+        except Exception as e:
+            print(f"❌ 获取活跃币种失败: {e}")
+            import traceback
+            traceback.print_exc()
+            # 返回默认币种作为fallback
+            return ["BTC", "ETH", "SOL"][:top_n]
     
     def get_candles(self, coin: str, interval: str = "3m", limit: int = 100) -> List[Dict]:
         """
@@ -140,6 +381,11 @@ class MarketDataFetcher:
             K线数据列表，每个元素包含 [timestamp, open, high, low, close, volume]
         """
         try:
+            # 检查币种是否支持K线数据（是否在name_to_coin字典中）
+            if coin not in self.info.name_to_coin:
+                print(f"⚠️ 币种 {coin} 不支持K线数据，已跳过")
+                return []
+            
             # 计算时间范围
             # 根据 interval 和 limit 计算需要的时间范围
             from datetime import datetime, timedelta
@@ -256,6 +502,45 @@ class MarketDataFetcher:
             if candles_3m:
                 indicators = self.calculate_indicators(candles_3m)
                 market_state[coin] = indicators
+                
+                # 检测 RSI 背离信号（多周期）
+                mid_prices = indicators.get('mid_prices', [])
+                rsi7_series = indicators.get('rsi7_series', [])
+                rsi14_series = indicators.get('rsi14_series', [])
+                
+                # RSI(14) 背离检测
+                rsi14_divergence = TechnicalIndicators.detect_rsi_divergence(
+                    prices=mid_prices,
+                    rsi_values=rsi14_series
+                )
+                
+                # RSI(7) 背离检测
+                rsi7_divergence = TechnicalIndicators.detect_rsi_divergence(
+                    prices=mid_prices,
+                    rsi_values=rsi7_series
+                )
+                
+                # 整合背离信号
+                divergence_signals = []
+                
+                if rsi14_divergence.get('has_divergence'):
+                    divergence_signals.append({
+                        'period': 'RSI(14)',
+                        **rsi14_divergence
+                    })
+                
+                if rsi7_divergence.get('has_divergence'):
+                    divergence_signals.append({
+                        'period': 'RSI(7)',
+                        **rsi7_divergence
+                    })
+                
+                # 添加背离信息到市场状态
+                market_state[coin]['rsi_divergence'] = {
+                    'has_any_divergence': len(divergence_signals) > 0,
+                    'signals': divergence_signals,
+                    'multi_timeframe': len(divergence_signals) > 1,  # 是否多周期确认
+                }
                 
                 # 可选：获取 4 小时数据作为长期趋势参考
                 candles_4h = self.get_candles(coin, interval="4h", limit=50)

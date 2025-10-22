@@ -1,0 +1,15 @@
+{
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "hold",
+      "quantity": 0.078,
+      "profit_target": 4079.66,
+      "stop_loss": 3694.37,
+      "invalidation_condition": "If price breaks below stop_loss or if MACD remains negative with RSI dropping below 45, indicating weakening momentum.",
+      "leverage": 10,
+      "confidence": 0.6,
+      "risk_usd": 9.81
+    }
+  }
+}

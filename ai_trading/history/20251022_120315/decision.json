@@ -1,0 +1,16 @@
+{
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "hold",
+      "quantity": 0.078,
+      "profit_target": 4065.2,
+      "stop_loss": 3697.7,
+      "invalidation_condition": "If price closes below 3697.7",
+      "leverage": 10,
+      "confidence": 0.6,
+      "risk_usd": 9.56,
+      "justification": "ETH is oversold with RSI at 35.5, indicating potential for a bounce. The position is slightly profitable, and holding with a stop loss based on ATR manages risk while targeting a 1:2 reward ratio. Longer-term bearish trend warrants caution, but the oversold condition supports a hold strategy."
+    }
+  }
+}

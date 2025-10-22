@@ -83,6 +83,41 @@ RSI indicators (7-Period): {self._format_list(data['rsi7_series'])}
 
 RSI indicators (14-Period): {self._format_list(data['rsi14_series'])}"""
 
+            # 添加 RSI 背离信号（如果检测到）
+            if 'rsi_divergence' in data and data['rsi_divergence']['has_any_divergence']:
+                div_data = data['rsi_divergence']
+                section += "\n\n" + "="*70
+                section += "\n⚠️ RSI 背离信号检测 - 强力反转信号\n"
+                section += "="*70
+                section += "\n背离是RSI指标中威力最强、也最受重视的信号，它往往预示着潜在的趋势反转。\n"
+                
+                # 显示每个检测到的背离信号
+                for i, signal in enumerate(div_data['signals'], 1):
+                    period = signal['period']
+                    div_type = signal['divergence_type']
+                    strength = signal['divergence_strength']
+                    description = signal['description']
+                    
+                    # 中文翻译
+                    type_cn = "顶背离 (看跌)" if div_type == "bearish" else "底背离 (看涨)"
+                    strength_cn = {"strong": "强", "moderate": "中等", "weak": "弱"}[strength]
+                    
+                    section += f"\n[信号 {i}] {period} - {type_cn}"
+                    section += f"\n  强度: {strength_cn.upper()}"
+                    section += f"\n  详情: {description}"
+                    
+                    # 添加交易建议
+                    if div_type == "bearish":
+                        section += "\n  📉 建议: 考虑做空或平掉多仓，潜在下跌趋势"
+                    else:
+                        section += "\n  📈 建议: 考虑做多或平掉空仓，潜在上涨趋势"
+                
+                # 多周期确认
+                if div_data['multi_timeframe']:
+                    section += "\n\n🔥 多周期确认: RSI(7) 和 RSI(14) 同时出现背离，信号更强！"
+                
+                section += "\n" + "="*70
+
             # 添加长期数据（如果有）
             if 'long_term' in data:
                 lt = data['long_term']
@@ -133,6 +168,30 @@ Based on the market data above, make your trading decisions. For each coin, you 
 1. ENTRY - Enter a new position (if you have no position)
 2. HOLD - Keep your current position
 3. CLOSE - Close your current position
+
+⚠️ PROFESSIONAL TRADER MINDSET - PATIENCE IS KEY:
+You are a mature, professional trader. Professional traders do NOT trade every opportunity.
+- Wait for HIGH-QUALITY setups with strong confluence of signals
+- It is PERFECTLY FINE to stay in cash and do nothing if conditions are unclear
+- "No trade" is often the best trade - preserve capital when edge is uncertain
+- Only enter when you have genuine conviction based on multiple confirming indicators
+- Overtrading is the enemy - be selective and disciplined
+- Better to miss an opportunity than to force a mediocre trade
+
+Good entry signals typically show:
+✓ Multiple indicators confirming the same direction (RSI, MACD, EMA alignment)
+✓ Strong divergence signals (especially multi-timeframe confirmation)
+✓ Clear trend or momentum with favorable risk/reward (≥1:2)
+✓ Volume confirmation for breakouts
+✓ Price action near key levels (support/resistance)
+
+Avoid trading when:
+✗ Indicators are mixed or contradictory
+✗ Market is choppy/sideways with no clear trend
+✗ Risk/reward ratio is poor (<1:2)
+✗ You're uncertain or forcing a trade just to "do something"
+
+Remember: A professional trader's job is to wait for the best opportunities, not to be constantly active.
 
 Return your decisions in the following JSON format:
 
@@ -187,9 +246,23 @@ For CLOSE:
 IMPORTANT RULES:
 1. No pyramiding - you cannot add to existing positions
 2. Always set stop loss and take profit for entries
-3. Risk management is critical - use appropriate position sizing
-4. Leverage range: 5x to 40x
-5. Only enter if the risk/reward ratio is favorable (at least 1:2)
+3. Leverage range: 5x to 40x
+4. Risk/reward ratio must be at least 1:2 (prefer 1:2.5 or 1:3 when possible)
+
+STOP LOSS & TAKE PROFIT - ATR-BASED APPROACH:
+Use ATR (Average True Range) to set intelligent stops/targets that adapt to market volatility:
+
+Formula:
+- STOP LOSS: Entry ± (1.5 to 2.0) × 14-Period ATR  →  typically 1.5%-3% from entry
+- TAKE PROFIT: Entry ± (3.0 to 4.0) × 14-Period ATR  →  typically 4%-6% from entry
+
+Example: BNB at $1000, ATR = $20
+- LONG: Stop $960 (-2×ATR), Target $1080 (+4×ATR) = 4% risk, 8% profit = 1:2 ✅
+- SHORT: Stop $1040 (+2×ATR), Target $920 (-4×ATR) = 4% risk, 8% profit = 1:2 ✅
+
+Position Sizing:
+Position Size = risk_usd / (entry_price × stop_loss_percent)
+Example: $20 risk, 2% stop, $1000 BNB → Size = 20/(1000×0.02) = 1.0 BNB
 
 Please analyze the data and return your trading decisions in valid JSON format."""
     

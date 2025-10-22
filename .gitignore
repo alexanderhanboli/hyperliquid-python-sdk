@@ -663,3 +663,4 @@ logs/
 temp/
 tmp/
 *.tmp
+config.env

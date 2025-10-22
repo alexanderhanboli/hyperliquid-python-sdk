@@ -1,0 +1,18 @@
+{
+  "BTC": {
+    "trade_signal_args": {
+      "coin": "BTC",
+      "signal": "close",
+      "quantity": 0.0185,
+      "justification": "Bearish indicators with price below EMA20, negative MACD, and no strong bullish signals. Closing to cut losses and preserve capital amid downward momentum."
+    }
+  },
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "close",
+      "quantity": 0.26,
+      "justification": "Mixed to bearish signals, MACD negative, and price struggling to maintain above EMA20. Exiting to avoid potential drawdown and wait for clearer trends."
+    }
+  }
+}

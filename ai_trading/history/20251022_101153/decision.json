@@ -1,0 +1,10 @@
+{
+  "BTC": {
+    "trade_signal_args": {
+      "coin": "BTC",
+      "signal": "close",
+      "quantity": 0.01827,
+      "justification": "BTC shows bearish momentum with price below EMA20, negative MACD, and no strong reversal signals. The current loss and mixed indicators suggest closing the position to preserve capital and avoid further downside risk."
+    }
+  }
+}

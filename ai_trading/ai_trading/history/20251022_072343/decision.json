@@ -1,0 +1,32 @@
+{
+  "BNB": {
+    "trade_signal_args": {
+      "coin": "BNB",
+      "signal": "entry",
+      "is_buy": true,
+      "quantity": 2.04,
+      "profit_target": 1074.7,
+      "stop_loss": 1060.0,
+      "invalidation_condition": "If price breaks below 1060 and MACD turns negative or RSI fails to recover above 20",
+      "leverage": 5,
+      "confidence": 0.7,
+      "risk_usd": 10.0,
+      "justification": "BNB is extremely oversold with RSI at 15.152, indicating a high probability of a bounce. Entry with stop loss at 1060 and profit target at 1074.7 provides a favorable 1:2 risk/reward ratio based on the oversold condition and potential reversal."
+    }
+  },
+  "APT": {
+    "trade_signal_args": {
+      "coin": "APT",
+      "signal": "entry",
+      "is_buy": true,
+      "quantity": 598.8,
+      "profit_target": 3.2501,
+      "stop_loss": 3.2,
+      "invalidation_condition": "If price falls below 3.20 and RSI remains below 10, signaling continued weakness",
+      "leverage": 5,
+      "confidence": 0.7,
+      "risk_usd": 10.0,
+      "justification": "APT has an RSI of 8.370, deeply oversold, suggesting a strong reversal potential. Stop loss at 3.20 and profit target at 3.2501 ensure a 1:2 risk/reward ratio, capitalizing on the expected bounce."
+    }
+  }
+}

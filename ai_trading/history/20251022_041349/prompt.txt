@@ -1,0 +1,165 @@
+USER_PROMPT
+It has been 0 minutes since you started trading. The current time is 2025-10-22 04:13:50 and you've been invoked 1 times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
+
+ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+
+Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3-minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+
+CURRENT MARKET STATE FOR ALL COINS
+
+ALL BTC DATA
+current_price = 108822, current_ema20 = 109580, current_macd = -48.1932, current_rsi (7 period) = 41.222
+
+Intraday series (3-minute intervals, oldest → latest):
+
+BTC mid prices: [110345.000, 110345.000, 110345.000, 110345.000, 110662.000, 108576.000, 110774.000, 108733.000, 109794.000, 108822.000]
+
+EMA indicators (20-period): [109403.559, 109493.220, 109574.342, 109647.738, 109744.335, 109633.065, 109741.725, 109645.656, 109659.784, 109579.995]
+
+MACD indicators: [-150.226, -58.480, 14.066, 70.744, 139.632, 25.608, 111.320, 14.390, 22.922, -48.193]
+
+RSI indicators (7-Period): [67.131, 67.131, 67.027, 52.963, 55.849, 47.618, 68.021, 37.865, 46.423, 41.222]
+
+RSI indicators (14-Period): [49.700, 59.321, 58.338, 60.799, 61.996, 41.376, 53.032, 50.969, 54.943, 51.086]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 110305 vs. 50-Period EMA: 110327
+
+3-Period ATR: 3579 vs. 14-Period ATR: 3261.07
+
+Current Volume: 0.002 vs. Average Volume: 2.950
+
+MACD indicators: [316.720, 427.590, 475.359, 479.687, 405.257, 693.083, 966.530, 866.621, 768.018, 535.232]
+
+RSI indicators (14-Period): [77.614, 81.840, 76.717, 72.695, 64.325, 79.790, 79.295, 58.110, 56.371, 50.846]
+
+ALL ETH DATA
+current_price = 3878.3, current_ema20 = 3867.91, current_macd = 2.10527, current_rsi (7 period) = 93.023
+
+Intraday series (3-minute intervals, oldest → latest):
+
+ETH mid prices: [3861.700, 3861.100, 3863.500, 3865.800, 3868.100, 3866.900, 3871.600, 3875.400, 3876.400, 3878.300]
+
+EMA indicators (20-period): [3863.227, 3863.024, 3863.069, 3863.330, 3863.784, 3864.081, 3864.797, 3865.807, 3866.815, 3867.909]
+
+MACD indicators: [-2.924, -2.733, -2.360, -1.858, -1.259, -0.872, -0.184, 0.661, 1.395, 2.105]
+
+RSI indicators (7-Period): [47.569, 26.636, 41.538, 76.471, 79.874, 87.586, 88.535, 89.595, 93.220, 93.023]
+
+RSI indicators (14-Period): [48.307, 48.416, 55.478, 62.440, 64.318, 61.416, 64.421, 63.341, 56.777, 65.668]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 3937.32 vs. 50-Period EMA: 3946.87
+
+3-Period ATR: 65.4 vs. 14-Period ATR: 87.8214
+
+Current Volume: 0.007 vs. Average Volume: 21.518
+
+MACD indicators: [35.572, 33.835, 27.598, 20.162, 13.844, 24.013, 25.468, 16.218, 7.510, 1.416]
+
+RSI indicators (14-Period): [68.273, 69.401, 57.162, 52.004, 49.176, 69.050, 57.749, 42.664, 40.700, 42.061]
+
+ALL SOL DATA
+current_price = 186.13, current_ema20 = 185.895, current_macd = -0.199599, current_rsi (7 period) = 100.000
+
+Intraday series (3-minute intervals, oldest → latest):
+
+SOL mid prices: [185.400, 185.400, 185.400, 185.400, 185.710, 185.710, 185.710, 185.710, 185.710, 186.130]
+
+EMA indicators (20-period): [186.176, 186.102, 186.035, 185.975, 185.950, 185.927, 185.906, 185.888, 185.871, 185.895]
+
+MACD indicators: [-0.302, -0.327, -0.342, -0.350, -0.328, -0.307, -0.287, -0.268, -0.250, -0.200]
+
+RSI indicators (7-Period): [45.181, 42.767, 42.767, 24.793, 40.132, 25.410, 25.410, 100.000, 100.000, 100.000]
+
+RSI indicators (14-Period): [29.508, 28.808, 35.223, 35.223, 48.963, 50.862, 56.459, 53.807, 52.105, 60.776]
+
+Longer-term context (4-hour timeframe):
+
+20-Period EMA: 187.976 vs. 50-Period EMA: 186.597
+
+3-Period ATR: 4.07333 vs. 14-Period ATR: 4.98071
+
+Current Volume: 0.370 vs. Average Volume: 213.819
+
+MACD indicators: [2.894, 2.844, 2.419, 1.988, 1.742, 2.339, 2.586, 2.076, 1.601, 1.243]
+
+RSI indicators (14-Period): [59.432, 64.373, 53.508, 51.596, 50.342, 65.651, 58.092, 44.617, 46.004, 47.696]
+
+HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+Current Total Return (percent): -90.01%
+
+Available Cash: 999.00
+
+Current Account Value: 999.00
+
+No current positions.
+
+Sharpe Ratio: 0.000
+
+INSTRUCTIONS:
+Based on the market data above, make your trading decisions. For each coin, you can:
+1. ENTRY - Enter a new position (if you have no position)
+2. HOLD - Keep your current position
+3. CLOSE - Close your current position
+
+Return your decisions in the following JSON format:
+
+For ENTRY:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "entry",
+      "is_buy": true/false,
+      "quantity": <float>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int 5-40>,
+      "confidence": <0-1>,
+      "risk_usd": <float>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+For HOLD:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "hold",
+      "quantity": <full current size>,
+      "profit_target": <float>,
+      "stop_loss": <float>,
+      "invalidation_condition": "<string>",
+      "leverage": <int>,
+      "confidence": <0-1>,
+      "risk_usd": <float>
+    }
+  }
+}
+
+For CLOSE:
+{
+  "COIN": {
+    "trade_signal_args": {
+      "coin": "COIN",
+      "signal": "close",
+      "quantity": <full position size>,
+      "justification": "<1-4 sentences>"
+    }
+  }
+}
+
+IMPORTANT RULES:
+1. No pyramiding - you cannot add to existing positions
+2. Always set stop loss and take profit for entries
+3. Risk management is critical - use appropriate position sizing
+4. Leverage range: 5x to 40x
+5. Only enter if the risk/reward ratio is favorable (at least 1:2)
+
+Please analyze the data and return your trading decisions in valid JSON format.

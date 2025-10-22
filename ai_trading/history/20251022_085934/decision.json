@@ -1,0 +1,32 @@
+{
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "entry",
+      "is_buy": true,
+      "quantity": 0.1206,
+      "profit_target": 4193.3572,
+      "stop_loss": 3695.8714,
+      "invalidation_condition": "If price breaks below stop_loss at 3695.87",
+      "leverage": 10,
+      "confidence": 0.8,
+      "risk_usd": 20.0,
+      "justification": "ETH RSI at 12.7 indicates extreme oversold conditions, suggesting a potential bounce. MACD is negative but may reverse, and using ATR-based stops ensures proper risk management with a favorable risk/reward ratio."
+    }
+  },
+  "DOGE": {
+    "trade_signal_args": {
+      "coin": "DOGE",
+      "signal": "entry",
+      "is_buy": false,
+      "quantity": 2534.0,
+      "profit_target": 0.17569716,
+      "stop_loss": 0.19937142,
+      "invalidation_condition": "If price breaks above stop_loss at 0.19937",
+      "leverage": 10,
+      "confidence": 0.9,
+      "risk_usd": 20.0,
+      "justification": "DOGE RSI at 100 indicates extreme overbought conditions, with a high probability of pullback. Price is above EMA but momentum may reverse, and ATR-based stops provide a solid 1:2 risk/reward ratio."
+    }
+  }
+}

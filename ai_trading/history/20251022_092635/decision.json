@@ -1,0 +1,10 @@
+{
+  "TAO": {
+    "trade_signal_args": {
+      "coin": "TAO",
+      "signal": "close",
+      "quantity": 1.3,
+      "justification": "RSI at 0 indicates an extreme oversold condition, signaling a high probability of a price reversal upwards. Closing the short position to avoid potential losses and preserve capital, as the risk-reward is unfavorable amid contrarian signals."
+    }
+  }
+}

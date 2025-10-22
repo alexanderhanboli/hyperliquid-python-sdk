@@ -1,0 +1,170 @@
+{
+  "BTC": {
+    "trade_signal_args": {
+      "coin": "BTC",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; market conditions are overbought with RSI at 100 and mixed signals, so waiting for a clearer setup."
+    }
+  },
+  "ETH": {
+    "trade_signal_args": {
+      "coin": "ETH",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; indicators are neutral to bearish with low volume, lacking confluence for a high-quality entry."
+    }
+  },
+  "BNB": {
+    "trade_signal_args": {
+      "coin": "BNB",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; although oversold, there is no confirmation from other indicators, and risk/reward is uncertain."
+    }
+  },
+  "SOL": {
+    "trade_signal_args": {
+      "coin": "SOL",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; market is choppy with no clear trend, and indicators are mixed, so patience is key."
+    }
+  },
+  "DOGE": {
+    "trade_signal_args": {
+      "coin": "DOGE",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; flat price action and neutral indicators do not provide a compelling entry signal."
+    }
+  },
+  "ADA": {
+    "trade_signal_args": {
+      "coin": "ADA",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; conflicting RSI signals and low volume make it unclear, so avoiding a trade."
+    }
+  },
+  "HYPE": {
+    "trade_signal_args": {
+      "coin": "HYPE",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; strong bullish move but overbought conditions and high volatility increase risk, so waiting for a pullback or confirmation."
+    }
+  },
+  "SUI": {
+    "trade_signal_args": {
+      "coin": "SUI",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; neutral indicators and lack of momentum do not justify an entry at this time."
+    }
+  },
+  "TAO": {
+    "trade_signal_args": {
+      "coin": "TAO",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; extremely oversold but no reversal signals, so it's better to preserve capital."
+    }
+  },
+  "AAVE": {
+    "trade_signal_args": {
+      "coin": "AAVE",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; oversold conditions exist, but without confirming indicators, the edge is too weak for a trade."
+    }
+  },
+  "ASTER": {
+    "trade_signal_args": {
+      "coin": "ASTER",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; bearish trend and oversold RSI lack confluence, so no trade is the best action."
+    }
+  },
+  "NEAR": {
+    "trade_signal_args": {
+      "coin": "NEAR",
+      "signal": "hold",
+      "quantity": 0.0,
+      "profit_target": 0.0,
+      "stop_loss": 0.0,
+      "invalidation_condition": "N/A - no position",
+      "leverage": 1,
+      "confidence": 0.0,
+      "risk_usd": 0.0,
+      "justification": "No current position; flat price action and mixed signals do not provide a high-confidence setup for entry."
+    }
+  }
+}

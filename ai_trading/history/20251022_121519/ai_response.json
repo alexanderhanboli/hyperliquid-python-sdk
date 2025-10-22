@@ -1,0 +1,13 @@
+{
+  "model": "deepseek-reasoner",
+  "created": 1761135324,
+  "finish_reason": "stop",
+  "has_reasoning": true,
+  "reasoning_length": 8704,
+  "response_length": 334,
+  "usage": {
+    "prompt_tokens": 10923,
+    "completion_tokens": 2835,
+    "total_tokens": 13758
+  }
+}
