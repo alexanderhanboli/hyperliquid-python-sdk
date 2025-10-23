@@ -199,10 +199,13 @@ class OrderExecutor:
             if not self._validate_tp_sl_params(decision):
                 return {"status": "error", "message": "Invalid stop loss or take profit parameters"}
 
+        # 舍入数量以符合 szDecimals
+        rounded_quantity = self._round_size(coin, quantity)
+        
         print(f"\n{'='*60}")
         print(f"📈 开仓: {coin}")
         print(f"  方向: {'做多 (Long)' if is_buy else '做空 (Short)'}")
-        print(f"  数量: {quantity}")
+        print(f"  数量: {rounded_quantity}")
         print(f"  当前价格: ${current_price:.2f}")
         print(f"  杠杆: {leverage}x")
         print(f"  保证金: ${order_value:.2f}")
@@ -225,7 +228,7 @@ class OrderExecutor:
             entry_result = self.exchange.market_open(
                 name=coin,  # 注意参数名是 'name' 不是 'coin'
                 is_buy=is_buy,
-                sz=quantity,
+                sz=rounded_quantity,
                 slippage=slippage
             )
 
@@ -262,7 +265,7 @@ class OrderExecutor:
                 sl_result = self._set_stop_loss(
                     coin=coin,
                     is_buy=is_buy,
-                    quantity=quantity,
+                    quantity=rounded_quantity,
                     stop_loss_price=stop_loss
                 )
                 if sl_result.get("status") == "ok":
@@ -276,7 +279,7 @@ class OrderExecutor:
                 tp_result = self._set_take_profit(
                     coin=coin,
                     is_buy=is_buy,
-                    quantity=quantity,
+                    quantity=rounded_quantity,
                     take_profit_price=profit_target
                 )
                 if tp_result.get("status") == "ok":
@@ -293,7 +296,7 @@ class OrderExecutor:
                 # 如果需要止损和止盈都设置，但有一个失败了
                 if not sl_success or not tp_success:
                     print(f"🚨 止损止盈设置不完整，执行紧急平仓")
-                    emergency_result = self._emergency_close(coin, quantity)
+                    emergency_result = self._emergency_close(coin, rounded_quantity)
 
                     # 取消已设置的订单
                     if sl_oid:
@@ -318,19 +321,19 @@ class OrderExecutor:
                 # 如果只需要设置其中一个，检查是否成功
                 if stop_loss and not sl_success:
                     print(f"🚨 止损设置失败，执行紧急平仓")
-                    self._emergency_close(coin, quantity)
+                    self._emergency_close(coin, rounded_quantity)
                     return {"status": "error", "message": "Stop loss setup failed"}
 
                 if profit_target and not tp_success:
                     print(f"🚨 止盈设置失败，执行紧急平仓")
-                    self._emergency_close(coin, quantity)
+                    self._emergency_close(coin, rounded_quantity)
                     return {"status": "error", "message": "Take profit setup failed"}
 
             # 记录持仓
             self.positions[coin] = {
                 "coin": coin,
                 "is_buy": is_buy,
-                "quantity": quantity,
+                "quantity": rounded_quantity,
                 "entry_price": actual_entry_price,
                 "leverage": leverage,
                 "stop_loss": stop_loss,
