@@ -294,18 +294,38 @@ class AITradingBot:
             
             # 添加 token 使用信息（如果有的话）
             if hasattr(response, 'usage') and response.usage:
-                response_metadata["usage"] = {
+                usage_data = {
                     "prompt_tokens": response.usage.prompt_tokens,
                     "completion_tokens": response.usage.completion_tokens,
                     "total_tokens": response.usage.total_tokens,
                 }
+                # 添加 DeepSeek Context Caching 信息
+                if hasattr(response.usage, 'prompt_cache_hit_tokens'):
+                    usage_data["prompt_cache_hit_tokens"] = response.usage.prompt_cache_hit_tokens
+                if hasattr(response.usage, 'prompt_cache_miss_tokens'):
+                    usage_data["prompt_cache_miss_tokens"] = response.usage.prompt_cache_miss_tokens
+                
+                response_metadata["usage"] = usage_data
             
             response_metadata_file = self.current_cycle_dir / "ai_response.json"
             with open(response_metadata_file, "w", encoding="utf-8") as f:
                 json.dump(response_metadata, f, indent=2, ensure_ascii=False)
             
+            # 显示保存信息，包括 cache hit 统计
+            usage_info = response_metadata.get('usage', {})
+            total_tokens = usage_info.get('total_tokens', 'N/A')
+            cache_hit = usage_info.get('prompt_cache_hit_tokens', 0)
+            cache_miss = usage_info.get('prompt_cache_miss_tokens', 0)
+            
             print(f"  ✅ AI 响应已保存 (reasoning: {response_metadata['has_reasoning']}, " +
-                  f"tokens: {response_metadata.get('usage', {}).get('total_tokens', 'N/A')})")
+                  f"tokens: {total_tokens})")
+            
+            # 如果有 cache 信息，显示 cache hit 率
+            if cache_hit > 0 or cache_miss > 0:
+                total_prompt = cache_hit + cache_miss
+                cache_rate = (cache_hit / total_prompt * 100) if total_prompt > 0 else 0
+                print(f"  📊 Cache Hit: {cache_hit} tokens ({cache_rate:.1f}%), " +
+                      f"Cache Miss: {cache_miss} tokens")
         
         except Exception as e:
             print(f"  ⚠️ 保存 AI 响应失败: {e}")
@@ -337,13 +357,18 @@ class AITradingBot:
             # deepseek-chat: 最大 8K, deepseek-reasoner: 最大 64K
             max_tokens = 64000 if self.model == "deepseek-reasoner" else 8000
             
+            # 获取系统 prompt（固定内容，可被 DeepSeek Context Caching 缓存）
+            system_prompt = self.prompt_builder.build_system_prompt()
+            
             # 调用 DeepSeek API (使用 OpenAI SDK)
+            # system prompt 包含所有固定的指令和规则，能够被缓存
+            # user prompt 只包含实时变化的市场数据和账户信息
             response = self.ai_client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an expert cryptocurrency trading AI assistant. Always respond with valid JSON format."
+                        "content": system_prompt
                     },
                     {
                         "role": "user",

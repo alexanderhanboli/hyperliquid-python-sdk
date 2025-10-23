@@ -664,3 +664,12 @@ temp/
 tmp/
 *.tmp
 config.env
+
+# AI Trading generated files
+ai_trading/history/
+ai_trading/last_decision.json
+ai_trading/last_prompt.txt
+
+# AI Trading test files
+ai_trading/test_*.py
+ai_trading/verify_*.py
