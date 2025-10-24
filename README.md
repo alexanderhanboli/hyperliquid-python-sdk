@@ -27,40 +27,43 @@ pip install hyperliquid-python-sdk
 ### [Optional] Generate a new API key for an API Wallet
 Generate and authorize a new API private key on https://app.hyperliquid.xyz/API, and set the API wallet's private key as the `secret_key` in examples/config.json. Note that you must still set the public key of the main wallet *not* the API wallet as the `account_address` in examples/config.json
 
-## 🤖 NEW: AI Trading Bot System
+## 🤖 AI Trading Bot System
 
-We've added a complete AI-powered trading system that replicates the [nof1.ai](https://nof1.ai/) architecture using **Claude Sonnet 4.5**!
+A complete AI-powered trading system using **DeepSeek AI** with advanced technical analysis and RSI divergence detection.
 
 ### Quick Start
 ```bash
 # Install dependencies
-pip install numpy pandas anthropic schedule
+pip install numpy pandas openai schedule python-dotenv
 
-# Set up API key
-export ANTHROPIC_API_KEY='your-api-key'
+# Set up API key in .env file
+cd ai_trading
+cp .env.example .env
+nano .env  # Add your DEEPSEEK_API_KEY
 
-# Run test
-python ai_trading/test_system.py
+# Run system test
+python test_system.py
 
 # Start the bot (test mode - runs once)
-python ai_trading/ai_trader_bot.py --test
+python ai_trader_bot.py --test
 
 # Start the bot (normal mode - runs every 3 minutes)
-python ai_trading/ai_trader_bot.py
+./start_deepseek.sh
 ```
 
 ### Features
 - ✅ Automatic market data collection and technical indicators (EMA, MACD, RSI, ATR)
-- ✅ AI-driven trading decisions using Claude Sonnet 4.5
+- ✅ AI-driven trading decisions using DeepSeek Reasoner
+- ✅ Advanced RSI divergence detection for reversal signals
 - ✅ Automatic risk management with stop-loss and take-profit
 - ✅ Multi-coin support (BTC, ETH, SOL, BNB, XRP, DOGE, etc.)
+- ✅ JSON mode for guaranteed valid AI responses
 - ✅ Testnet support for safe practice
 
 ### Documentation
-- **[AI_TRADING_GUIDE.md](AI_TRADING_GUIDE.md)** - Complete usage guide ⭐
+- **[ai_trading/README.md](ai_trading/README.md)** - Complete usage guide and system architecture ⭐
 - **[HOSTINGER_DEPLOYMENT.md](HOSTINGER_DEPLOYMENT.md)** - Deploy to Hostinger VPS (24/7) 🚀
-- **[ai_trading/README.md](ai_trading/README.md)** - System architecture
-- **[ai_trading/PROJECT_SUMMARY.md](ai_trading/PROJECT_SUMMARY.md)** - Project summary
+- **[CLAUDE.md](CLAUDE.md)** - Development instructions for Claude Code
 
 ### Deploy to Cloud (24/7 Trading)
 Run your bot on Hostinger VPS with one command:
@@ -69,11 +72,6 @@ wget https://raw.githubusercontent.com/alexanderhanboli/hyperliquid-python-sdk/t
 bash quick_deploy.sh
 ```
 See [HOSTINGER_DEPLOYMENT.md](HOSTINGER_DEPLOYMENT.md) for details.
-
-### Interactive Demo
-```bash
-python ai_trading_demo.py
-```
 
 ---
 
