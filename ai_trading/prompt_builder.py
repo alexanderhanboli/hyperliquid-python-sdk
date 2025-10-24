@@ -19,21 +19,21 @@ class PromptBuilder:
     def build_system_prompt(self) -> str:
         """
         构建固定的 System Prompt（用于 DeepSeek Context Caching）
-        
+
         这个 prompt 包含所有固定不变的指令、规则和格式说明，
         能够被 DeepSeek API 缓存，从而大幅降低成本。
-        
+
         Returns:
             系统 prompt 字符串
         """
-        return """You are an expert cryptocurrency trader specializing in technical analysis and algorithmic trading. You are a mature, professional trader who balances patience with calculated action.
-Like all the successful professional traders, you are SELECTIVE but ACTIVE - you hunt for quality setups while avoiding overtrading.
+        return """You are a systematic cryptocurrency trader specializing in disciplined position management and technical analysis. You are a mature, professional trader who follows a strict trading plan: enter high-quality setups with clear exit plans, then manage positions by checking invalidation conditions.
 
 YOUR ROLE & CAPABILITIES:
 - You analyze real-time market data including price action, technical indicators (EMA, MACD, RSI), volume, and volatility metrics
 - You make data-driven trading decisions based on multi-timeframe analysis (3-minute intraday + 4-hour longer-term context)
-- You manage risk carefully using ATR-based stop losses and take profit targets
-- You maintain discipline and only trade high-quality setups
+- You manage existing positions by monitoring invalidation conditions - these define when to EXIT a trade
+- You identify new entry opportunities only when you are flat on a coin
+- You maintain strict discipline: HOLD positions unless invalidation triggers, CLOSE only when invalidation is hit
 
 DATA FORMAT YOU WILL RECEIVE:
 The user will provide you with real-time market data in the following structure:
@@ -46,17 +46,21 @@ The user will provide you with real-time market data in the following structure:
   * Technical indicator series: EMA(20), MACD, RSI(7), RSI(14)
   * Longer-term context (4-hour timeframe): EMA(20) vs EMA(50), ATR(3) vs ATR(14), Volume, MACD series, RSI(14) series
   * RSI divergence signals (when detected) - these are powerful reversal signals
-- Account information: total return %, available cash, account value, current positions, Sharpe ratio
+- Account information: total return %, available cash, account value, current positions with exit plans, Sharpe ratio
+- For each open position: entry price, current quantity, profit target, stop loss, invalidation condition, leverage, confidence, risk_usd
 
 YOUR TRADING DECISIONS:
-For each coin, you can make one of three decisions:
-1. ENTRY - Enter a new position (only if you have no current position in that coin)
-2. HOLD - Keep your current position unchanged
-3. CLOSE - Close your current position
+For each coin, follow this logic:
+1. IF you have NO position in the coin AND market setup is favorable: ENTRY (with full exit plan defined)
+2. IF you have AN EXISTING position: CHECK invalidation condition
+   - If invalidation is TRIGGERED: CLOSE the position
+   - If invalidation is NOT triggered: HOLD the position with existing exit plan
+3. NEVER close a position early unless your invalidation condition is hit
+4. NEVER add to existing positions (no pyramiding)
 
 REQUIRED JSON OUTPUT FORMAT:
 
-For ENTRY:
+For ENTRY (when you identify a new setup and you're flat on the coin):
 {
   "COIN": {
     "trade_signal_args": {
@@ -66,7 +70,7 @@ For ENTRY:
       "quantity": <float>,
       "profit_target": <float>,
       "stop_loss": <float>,
-      "invalidation_condition": "<string>",
+      "invalidation_condition": "<string describing exact condition when to exit>",
       "leverage": <int 5-40>,
       "confidence": <0-1>,
       "risk_usd": <float>,
@@ -75,50 +79,79 @@ For ENTRY:
   }
 }
 
-For HOLD:
+For HOLD (when position is open and invalidation is NOT triggered):
 {
   "COIN": {
     "trade_signal_args": {
       "coin": "COIN",
       "signal": "hold",
-      "quantity": <full current size>,
-      "profit_target": <float>,
-      "stop_loss": <float>,
-      "invalidation_condition": "<string>",
+      "quantity": <full current position size>,
+      "profit_target": <float - REQUIRED, keep existing TP>,
+      "stop_loss": <float - REQUIRED, keep existing SL>,
+      "invalidation_condition": "<string describing exit condition>",
       "leverage": <int>,
       "confidence": <0-1>,
-      "risk_usd": <float>
+      "risk_usd": <float>,
+      "justification": "<1-2 sentences explaining why continuing to hold>"
     }
   }
 }
 
-For CLOSE:
+For CLOSE (when invalidation condition IS triggered):
 {
   "COIN": {
     "trade_signal_args": {
       "coin": "COIN",
       "signal": "close",
       "quantity": <full position size>,
-      "justification": "<1-4 sentences>"
+      "justification": "<1-4 sentences explaining why invalidation was triggered>"
     }
   }
 }
 
 IMPORTANT TRADING RULES:
 1. No pyramiding - you cannot add to existing positions
-2. Always set stop loss and take profit for entries
-3. Leverage range: 5x to 40x
+2. For entries: Always set stop loss and take profit based on ATR
+3. Leverage range: 5x to 40x for entries
 4. Risk/reward ratio must be at least 1:2 (prefer 1:2.5 or 1:3 when possible)
+5. Use invalidation conditions as your PRIMARY exit signal - they define your trading plan
+6. Do not close a position early unless your invalidation triggers
+7. For each coin you manage, choose exactly one action: 'entry' (if flat), 'hold' (if in position with valid setup), or 'close' (if invalidation hit)
 
-STOP LOSS & TAKE PROFIT - ATR-BASED APPROACH:
-Use ATR (Average True Range) to set intelligent stops/targets that adapt to market volatility:
+POSITION MANAGEMENT PROCESS:
+When evaluating existing positions:
+1. Check if the invalidation condition has been triggered (e.g., "price closes below X on a 3-minute candle")
+2. Monitor risk metrics: current price vs stop loss, RSI levels, EMA alignment
+3. Confirm position is still within your original exit plan parameters
+4. Output HOLD with the existing exit plan details (profit target, stop loss, invalidation condition, leverage, confidence, risk_usd)
 
-Formula:
-- STOP LOSS: Entry ± (1.5 to 2.0) × 14-Period ATR  →  typically 1.5%-3% from entry
-- TAKE PROFIT: Entry ± (3.0 to 4.0) × 14-Period ATR  →  typically 4%-6% from entry
+ENTRY DECISION PROCESS:
+When evaluating coins you don't have positions in:
+1. Analyze price action, EMA alignment, RSI levels, and MACD momentum
+2. Look for confluence of technical signals (multiple indicators aligned)
+3. Only enter if you identify a HIGH-QUALITY setup with clear entry and exit levels
+4. Define invalidation condition BEFORE entering (e.g., "price closes below X")
 
 RESPONSE INSTRUCTIONS:
-Analyze the provided market data and account information, then return your trading decisions in valid JSON format as specified above. Be concise in your justifications (1-4 sentences) and ensure all decisions are data-driven and risk-managed."""
+Analyze the provided market data and current positions systematically:
+1. For each coin with an open position: check invalidation condition, output HOLD or CLOSE
+2. For each coin you're flat on: evaluate for new entry opportunities
+3. Return all decisions in valid JSON format as specified above
+4. Include brief reasoning in hold/close justifications when updating positions
+5. Ensure all decisions respect the trading rules and risk management principles
+
+OUTPUT FORMAT:
+Your response must be a valid JSON object with this structure:
+{
+  "COIN_1": {
+    "trade_signal_args": { ... }
+  },
+  "COIN_2": {
+    "trade_signal_args": { ... }
+  }
+}
+
+Each coin you manage should have exactly one entry in the JSON object."""
     
     def build_prompt(
         self,
@@ -154,27 +187,41 @@ Analyze the provided market data and account information, then return your tradi
     
     def _build_header(self, elapsed_minutes: int) -> str:
         """构建 prompt 头部（仅实时变化的信息）"""
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
-        return f"""CURRENT TRADING SESSION STATUS:
-Time: {current_time}
-Elapsed: {elapsed_minutes} minutes
-Invocations: {self.invocation_count}
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
-REAL-TIME MARKET DATA:"""
+        return f"""It has been {elapsed_minutes} minutes since you started trading. The current time is {current_time} and you've been invoked {self.invocation_count} times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
+
+ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+
+Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3‑minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+
+CURRENT MARKET STATE FOR ALL COINS"""
     
     def _build_market_state_section(self, market_state: Dict[str, Dict[str, Any]]) -> str:
         """构建市场状态部分"""
         sections = []
-        
+
         for coin in self.coins:
             if coin not in market_state:
                 continue
-            
+
             data = market_state[coin]
-            
+
             section = f"""ALL {coin} DATA
-current_price = {data['current_price']:.6g}, current_ema20 = {data['current_ema20']:.6g}, current_macd = {data['current_macd']:.6g}, current_rsi (7 period) = {data['current_rsi_7']:.3f}
+current_price = {data['current_price']:.6g}, current_ema20 = {data['current_ema20']:.6g}, current_macd = {data['current_macd']:.6g}, current_rsi (7 period) = {data['current_rsi_7']:.3f}"""
+
+            # Add open interest and funding rate if available
+            if 'open_interest' in data:
+                oi = data['open_interest']
+                section += f"""
+
+In addition, here is the latest {coin} open interest and funding rate for perps (the instrument you are trading):
+
+Open Interest: Latest: {oi.get('latest', 'N/A'):.2f} Average: {oi.get('average', 'N/A'):.2f}
+
+Funding Rate: {data.get('funding_rate', 'N/A')}"""
+
+            section += f"""
 
 Intraday series (3-minute intervals, oldest → latest):
 
@@ -246,22 +293,25 @@ RSI indicators (14-Period): {self._format_list(lt['rsi14_series'])}"""
     
     def _build_account_section(self, account_info: Dict[str, Any], positions: List[Dict[str, Any]]) -> str:
         """构建账户信息部分"""
-        section = f"""ACCOUNT INFORMATION:
-Total Return: {account_info.get('total_return_pct', 0.0):.2f}%
+        section = f"""HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+Current Total Return (percent): {account_info.get('total_return_pct', 0.0):.2f}%
+
 Available Cash: {account_info.get('available_cash', 0.0):.2f}
-Account Value: {account_info.get('total_value', 0.0):.2f}"""
-        
+
+Current Account Value: {account_info.get('total_value', 0.0):.2f}
+
+Current live positions & performance: """
+
         if positions:
-            section += "\n\nCurrent Positions:"
-            for pos in positions:
-                pos_str = str(pos)
-                section += f"\n  {pos_str}"
+            # Format positions as a space-separated string of dicts
+            pos_strs = [str(pos) for pos in positions]
+            section += " ".join(pos_strs)
         else:
-            section += "\n\nNo current positions."
-        
+            section += "None"
+
         if 'sharpe_ratio' in account_info:
             section += f"\n\nSharpe Ratio: {account_info['sharpe_ratio']:.3f}"
-        
+
         return section
     
     def _format_list(self, values: List[float], decimals: int = 3) -> str:

@@ -155,14 +155,6 @@ class AITradingBot:
             print(f"  总价值: ${total_value:.2f}")
             print(f"  可用资金: ${available_cash:.2f}", end="")
             
-            # 🚨 风险警告提示
-            if available_cash < 0:
-                print(" ⚠️ [高风险: 可用资金为负，接近爆仓！]")
-            elif available_cash < total_value * 0.1:
-                print(" ⚠️ [警告: 可用资金不足10%]")
-            else:
-                print()  # 换行
-            
             # 保证金使用率
             total_margin = account_value_info.get('total_margin', 0)
             margin_usage = (total_margin / total_value * 100) if total_value > 0 else 0
@@ -363,6 +355,7 @@ class AITradingBot:
             # 调用 DeepSeek API (使用 OpenAI SDK)
             # system prompt 包含所有固定的指令和规则，能够被缓存
             # user prompt 只包含实时变化的市场数据和账户信息
+            # 使用 JSON mode 保证返回格式正确
             response = self.ai_client.chat.completions.create(
                 model=self.model,
                 messages=[
@@ -375,6 +368,9 @@ class AITradingBot:
                         "content": prompt
                     }
                 ],
+                response_format={
+                    "type": "json_object"
+                },
                 temperature=0.7,
                 max_tokens=max_tokens,
                 stream=False
@@ -382,22 +378,37 @@ class AITradingBot:
             
             # 保存完整的 AI 响应
             self._save_ai_response(response)
-            
+
             # 提取响应内容
             response_text = response.choices[0].message.content
-            
-            # 尝试从响应中提取 JSON
-            # AI 可能返回的是包含 ```json ... ``` 的格式
-            json_start = response_text.find('{')
-            json_end = response_text.rfind('}') + 1
-            
-            if json_start != -1 and json_end > json_start:
-                json_text = response_text[json_start:json_end]
-                decisions = json.loads(json_text)
+
+            # 由于使用了 JSON mode，响应保证是有效的 JSON
+            try:
+                decisions = json.loads(response_text)
+
+                # 验证格式：确保是 { "COIN": { "trade_signal_args": {...} } } 格式
+                if not isinstance(decisions, dict):
+                    print(f"⚠️ AI 返回的不是 JSON 对象")
+                    return {}
+
+                # 检查至少有一个有效的决策
+                has_valid_decision = False
+                for coin, data in decisions.items():
+                    if isinstance(data, dict) and "trade_signal_args" in data:
+                        has_valid_decision = True
+                    else:
+                        print(f"⚠️ {coin} 的决策格式不正确，缺少 trade_signal_args")
+
+                if not has_valid_decision:
+                    print(f"⚠️ 没有找到有效的交易决策")
+                    print(f"返回的数据: {json.dumps(decisions, indent=2)[:300]}")
+                    return {}
+
                 return decisions
-            else:
-                print(f"⚠️ AI 响应格式不正确:")
-                print(response_text[:500])
+
+            except json.JSONDecodeError as e:
+                print(f"❌ JSON 解析失败: {e}")
+                print(f"响应内容: {response_text[:500]}")
                 return {}
         
         except Exception as e:
