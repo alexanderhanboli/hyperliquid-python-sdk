@@ -63,7 +63,7 @@ python3 ai_trader_bot.py --test  # 会自动从 .env 加载配置
 python3 ai_trader_bot.py --top-coins 20 --test
 
 # 指定特定币种
-python3 ai_trader_bot.py --coins BTC ETH SOL --test
+python3 ai_trader_bot.py --coins BTC ETH SOL BNB DOGE XRP --test
 ```
 
 **使用 python-dotenv 自动加载**:

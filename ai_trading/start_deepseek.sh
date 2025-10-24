@@ -44,10 +44,10 @@ echo ""
 
 # 运行交易机器人
 if [ $# -eq 0 ]; then
-    # 默认参数：使用BTC ETH SOL
+    # 默认参数
     python ai_trading/ai_trader_bot.py \
         --model deepseek-reasoner \
-        --coins BTC ETH SOL \
+        --coins BTC ETH SOL BNB DOGE XRP \
         --interval 3 \
         --testnet
 else
