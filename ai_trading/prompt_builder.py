@@ -191,11 +191,11 @@ Each coin you manage should have exactly one entry in the JSON object."""
 
         return f"""It has been {elapsed_minutes} minutes since you started trading. The current time is {current_time} and you've been invoked {self.invocation_count} times. Below, we are providing you with a variety of state data, price data, and predictive signals so you can discover alpha. Below that is your current account information, value, performance, positions, etc.
 
-ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST
+**ALL OF THE PRICE OR SIGNAL DATA BELOW IS ORDERED: OLDEST → NEWEST**
 
-Timeframes note: Unless stated otherwise in a section title, intraday series are provided at 3‑minute intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
+**Timeframes note**: Unless stated otherwise in a section title, intraday series are provided at **3‑minute** intervals. If a coin uses a different interval, it is explicitly stated in that coin's section.
 
-CURRENT MARKET STATE FOR ALL COINS"""
+## CURRENT MARKET STATE FOR ALL COINS"""
     
     def _build_market_state_section(self, market_state: Dict[str, Dict[str, Any]]) -> str:
         """构建市场状态部分"""
@@ -207,7 +207,7 @@ CURRENT MARKET STATE FOR ALL COINS"""
 
             data = market_state[coin]
 
-            section = f"""ALL {coin} DATA
+            section = f"""### ALL {coin} DATA
 current_price = {data['current_price']:.6g}, current_ema20 = {data['current_ema20']:.6g}, current_macd = {data['current_macd']:.6g}, current_rsi (7 period) = {data['current_rsi_7']:.3f}"""
 
             # Add open interest and funding rate if available
@@ -223,7 +223,7 @@ Funding Rate: {data.get('funding_rate', 'N/A')}"""
 
             section += f"""
 
-Intraday series (3-minute intervals, oldest → latest):
+**Intraday series (3-minute intervals, oldest → latest):**
 
 {coin} mid prices: {self._format_list(data['mid_prices'])}
 
@@ -275,7 +275,7 @@ RSI indicators (14-Period): {self._format_list(data['rsi14_series'])}"""
                 lt = data['long_term']
                 section += f"""
 
-Longer-term context (4-hour timeframe):
+**Longer-term context (4-hour timeframe):**
 
 20-Period EMA: {lt['ema20']:.6g} vs. 50-Period EMA: {lt['ema50']:.6g}
 
@@ -293,12 +293,12 @@ RSI indicators (14-Period): {self._format_list(lt['rsi14_series'])}"""
     
     def _build_account_section(self, account_info: Dict[str, Any], positions: List[Dict[str, Any]]) -> str:
         """构建账户信息部分"""
-        section = f"""HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
+        section = f"""## HERE IS YOUR ACCOUNT INFORMATION & PERFORMANCE
 Current Total Return (percent): {account_info.get('total_return_pct', 0.0):.2f}%
 
 Available Cash: {account_info.get('available_cash', 0.0):.2f}
 
-Current Account Value: {account_info.get('total_value', 0.0):.2f}
+**Current Account Value:** {account_info.get('total_value', 0.0):.2f}
 
 Current live positions & performance: """
 

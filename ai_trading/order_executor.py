@@ -330,8 +330,14 @@ class OrderExecutor:
                 "leverage": leverage,
                 "stop_loss": stop_loss,
                 "profit_target": profit_target,
+                "invalidation_condition": decision.get("invalidation_condition"),
+                "confidence": decision.get("confidence", 0.5),
+                "risk_usd": decision.get("risk_usd", 0.0),
                 "sl_oid": sl_oid,
                 "tp_oid": tp_oid,
+                "wait_for_fill": False,
+                "entry_oid": entry_result.get("oid") if isinstance(entry_result, dict) else None,
+                "notional_usd": notional_value,
                 "entry_time": time.time()
             }
 
@@ -618,7 +624,7 @@ class OrderExecutor:
             current_positions = self.get_current_positions()
 
             for pos in current_positions:
-                coin = pos["coin"]
+                coin = pos["symbol"]
                 self.positions[coin] = {
                     "coin": coin,
                     "is_buy": pos["is_buy"],
@@ -627,8 +633,14 @@ class OrderExecutor:
                     "leverage": pos["leverage"],
                     "stop_loss": pos.get("stop_loss"),
                     "profit_target": pos.get("profit_target"),
-                    "sl_oid": None,  # 未知，重启后丢失
-                    "tp_oid": None,  # 未知，重启后丢失
+                    "invalidation_condition": pos.get("invalidation_condition"),
+                    "confidence": pos.get("confidence"),
+                    "risk_usd": pos.get("risk_usd"),
+                    "sl_oid": pos.get("sl_oid"),  # 可能存在
+                    "tp_oid": pos.get("tp_oid"),  # 可能存在
+                    "wait_for_fill": pos.get("wait_for_fill", False),
+                    "entry_oid": pos.get("entry_oid"),
+                    "notional_usd": pos.get("notional_usd"),
                     "entry_time": None  # 未知
                 }
 
@@ -691,24 +703,31 @@ class OrderExecutor:
                         liquidation_px = float(liquidation_px_val) if liquidation_px_val is not None else 0.0
                         
                         position_info = {
-                            "coin": coin,
+                            "symbol": coin,
                             "quantity": size,
-                            "is_buy": float(pos.get('szi', 0)) > 0,
                             "entry_price": entry_price,
                             "current_price": mark_price,
+                            "liquidation_price": liquidation_px,
                             "unrealized_pnl": unrealized_pnl,
                             "leverage": leverage,
-                            "liquidation_price": liquidation_px,
                         }
-                        
+
                         # 添加我们记录的额外信息
                         if coin in self.positions:
                             stored = self.positions[coin]
                             position_info.update({
-                                "stop_loss": stored.get("stop_loss"),
-                                "profit_target": stored.get("profit_target"),
+                                "exit_plan": {
+                                    "profit_target": stored.get("profit_target"),
+                                    "stop_loss": stored.get("stop_loss"),
+                                    "invalidation_condition": stored.get("invalidation_condition")
+                                },
+                                "confidence": stored.get("confidence"),
+                                "risk_usd": stored.get("risk_usd"),
                                 "sl_oid": stored.get("sl_oid"),
                                 "tp_oid": stored.get("tp_oid"),
+                                "wait_for_fill": stored.get("wait_for_fill", False),
+                                "entry_oid": stored.get("entry_oid"),
+                                "notional_usd": stored.get("notional_usd"),
                             })
                         
                         positions.append(position_info)
