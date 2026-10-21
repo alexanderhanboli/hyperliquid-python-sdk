@@ -14,9 +14,51 @@ SDK for Hyperliquid API trading with Python.
 
 </div>
 
+---
+
+> 📦 **AI Trading Bot 已独立**: `ai_trading/` 目录已移至独立仓库 [hyperliquid-ai-trader](../hyperliquid-ai-trader/)。如果您需要使用 AI 交易机器人,请查看新仓库。本仓库专注于 Hyperliquid Python SDK 的核心功能。
+
+---
+
 ## Installation
+
+### Install uv
+
+First, install uv using one of the following methods:
+
+#### macOS/Linux (using curl)
 ```bash
-pip install hyperliquid-python-sdk
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+#### Windows (using PowerShell)
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+#### Using pip
+```bash
+pip install uv
+```
+
+#### Using Homebrew (macOS/Linux)
+```bash
+brew install uv
+```
+
+After installation, restart your terminal or run `source ~/.bashrc` (or `source ~/.zshrc` on macOS) to make uv available in your PATH.
+
+### Using uv (Recommended)
+
+```bash
+# Create a virtual environment with Python 3.10
+uv venv --python 3.10
+
+# Activate the virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install the package
+uv pip install hyperliquid-python-sdk
 ```
 ## Configuration 
 
@@ -34,7 +76,7 @@ A complete AI-powered trading system using **DeepSeek AI** with advanced technic
 ### Quick Start
 ```bash
 # Install dependencies
-pip install numpy pandas openai schedule python-dotenv
+uv pip install numpy pandas openai schedule python-dotenv
 
 # Set up API key in .env file
 cd ai_trading
@@ -93,17 +135,20 @@ python examples/basic_order.py
 
 ## Getting started with contributing to this repo
 
-1. Download `Poetry`: https://python-poetry.org/. 
-   - Note that in the install script you might have to set `symlinks=True` in `venv.EnvBuilder`.
-   - Note that Poetry v2 is not supported, so you'll need to specify a specific version e.g. curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.4.1 python3 - 
+1. Install `uv`: https://docs.astral.sh/uv/. 
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
 
-2. Point poetry to correct version of python. For development we require python 3.10 exactly. Some dependencies have issues on 3.11, while older versions don't have correct typing support.
-`brew install python@3.10 && poetry env use /opt/homebrew/Cellar/python@3.10/3.10.16/bin/python3.10`
+2. Install Python 3.10 for development. For development we require python 3.10 exactly. Some dependencies have issues on 3.11, while older versions don't have correct typing support.
+   ```bash
+   brew install python@3.10 && uv python install 3.10
+   ```
 
 3. Install dependencies:
 
 ```bash
-make install
+uv sync
 ```
 
 ### Makefile usage
@@ -113,12 +158,11 @@ CLI commands for faster development. See `make help` for more details.
 ```bash
 check-safety          Run safety checks on dependencies
 cleanup               Cleanup project
-install               Install dependencies from poetry.lock
+install               Install dependencies
 install-types         Find and install additional types for mypy
 lint                  Alias for the pre-commit target
-lockfile-update       Update poetry.lock
-lockfile-update-full  Fully regenerate poetry.lock
-poetry-download       Download and install poetry
+lockfile-update       Update lock file
+lockfile-update-full  Fully regenerate lock file
 pre-commit            Run linters + formatters via pre-commit, run "make pre-commit hook=black" to run only black
 test                  Run tests with pytest
 update-dev-deps       Update development dependencies to latest versions
@@ -145,10 +189,10 @@ We follow the [Semantic Versions](https://semver.org/) specification and use [`R
 
 Building a new version of the application contains steps:
 
-- Bump the version of your package with `poetry version <version>`. You can pass the new version explicitly, or a rule such as `major`, `minor`, or `patch`. For more details, refer to the [Semantic Versions](https://semver.org/) standard.
+- Bump the version of your package in `pyproject.toml`. You can pass the new version explicitly, or update it manually following the [Semantic Versions](https://semver.org/) standard.
 - Make a commit to `GitHub`
 - Create a `GitHub release`
-- `poetry publish --build`
+- `uv build && uv publish`
 
 ## License
 
